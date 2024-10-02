@@ -11,7 +11,7 @@ h1 {
 
 h4 {
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  width: 200px;
 }
 
 #todo-list-container {
