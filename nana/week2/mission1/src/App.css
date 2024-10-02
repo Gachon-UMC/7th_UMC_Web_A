@@ -1,0 +1,56 @@
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Do Hyeon", sans-serif;
+  background-color: #fff7fb;
+}
+
+.button1 {
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 23px;
+  margin-left: 10px;
+  margin-bottom: 40px;
+  background-color: #ffdaec;
+  border: 2px solid #ffaec9;
+  color: #333;
+  border-radius: 15px;
+}
+
+.button2 {
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 23px;
+  margin-left: 10px;
+  margin-bottom: 40px;
+  background-color: #ff7676;
+  border: 2px solid #da4242;
+  border-radius: 15px;
+}
+
+.input {
+  font-family: "Do Hyeon", sans-serif;
+  margin-bottom: 10px;
+  display: inline-block;
+  width: 300px;
+  background-color: #ffe6f2;
+  padding: 10px;
+  border-radius: 30px;
+  border: 3px solid #ffcdde;
+  cursor: text;
+}
+
+.title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 60px;
+  color: #ff9abc;
+}
+
+.idkey {
+  font-size: 0px;
+}
+
+.key {
+  font-size: 20px;
+}
