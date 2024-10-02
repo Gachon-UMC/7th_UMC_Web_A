@@ -52,7 +52,11 @@ function App() {
       </form>
       <div>
         {todos.map((todo, _) => (
-          <div key={todo.id} style={{ display: "flex", gap: "20px" }}>
+          <div
+            className="container"
+            key={todo.id}
+            style={{ display: "flex", gap: "20px" }}
+          >
             {/* 수정이 아닐때 */}
             {editingId !== todo.id && (
               <div key={todo.id} style={{ display: "flex", gap: "5px" }}>
@@ -71,14 +75,27 @@ function App() {
                 />
               </div>
             )}
-            <button onClick={() => deleteTodo(todo.id)}>삭제하기</button>
+            <button
+              className="delete-button"
+              onClick={() => deleteTodo(todo.id)}
+            >
+              삭제하기
+            </button>
 
             {editingId === todo.id ? (
-              <button onClick={() => updateTodo(editingId, editText)}>
+              <button
+                className="edit-complete-button"
+                onClick={() => updateTodo(editingId, editText)}
+              >
                 수정 완료
               </button>
             ) : (
-              <button onClick={() => setEditingId(todo.id)}>수정 진행</button>
+              <button
+                className="edit-button"
+                onClick={() => setEditingId(todo.id)}
+              >
+                수정 진행
+              </button>
             )}
           </div>
         ))}
