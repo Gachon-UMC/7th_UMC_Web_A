@@ -13,8 +13,8 @@ export default Signup
 
 
 
-//css
 
+//css
 const SignupDiv = styled.div`
 width:91.5%;
 height:86%;
@@ -24,4 +24,6 @@ top:100px;
 left:100px;
 color:white;
 font-size:30px;
+padding-left:5px;
+padding-top:5px;
 `;

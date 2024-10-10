@@ -1,9 +1,10 @@
 import Movies from "../components/movies";
-// 
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const Nowplaying  = () => {
+import styled from "styled-components";
+
+const Toprated  = () => {
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
@@ -19,16 +20,22 @@ const Nowplaying  = () => {
     }, []);
 
     return (
-        <div>
-        // Optional Chaining 활용
+        <TopratedDiv>
             {movies.data?.results.map((movie) => (
                 <Movies key={movie.id} movie={movie}/>
             ))}
-        </div>
+        </TopratedDiv>
     )
 };
 
-export default Nowplaying ;
+export default Toprated ;
 
-
+//css
+const TopratedDiv =styled.div `
+background-color:pink;
+margin-left:100px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`;
 

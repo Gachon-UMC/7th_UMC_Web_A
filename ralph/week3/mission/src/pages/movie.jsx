@@ -28,24 +28,24 @@ const Movie= ()=> {
 
   <MovieDiv>
       카테고리
-    <div style={{display:"flex", flexShrink:"3", flexDirection:"row", justifyContent:"space-evenly",paddingLeft:"50px",paddingTop:"30px"}}>
+    <MoviebackgroundDiv>
 
-      <NowplayingButton onClick={gotonowplaying}>
-          <CommonDiv >현재 상영중인</CommonDiv>
-      </NowplayingButton>
+        <NowplayingButton onClick={gotonowplaying}>
+            <CommonDiv >현재 상영중인</CommonDiv>
+        </NowplayingButton>
 
-      <PopularButton onClick={gotoupopular} > 
-          <CommonDiv >인기있는</CommonDiv>
-      </PopularButton>
+        <PopularButton onClick={gotoupopular} > 
+            <CommonDiv >인기있는</CommonDiv>
+        </PopularButton>
 
-      <TopratedButton onClick={gotouptoprated} >
-          <CommonDiv >높은 평가를 받은</CommonDiv>
-      </TopratedButton>
+        <TopratedButton onClick={gotouptoprated} >
+            <CommonDiv >높은 평가를 받은</CommonDiv>
+        </TopratedButton>
 
-      <UpcommingButton onClick={gotoupcomming}>
-          <CommonDiv >개봉 예정중인</CommonDiv>
-      </UpcommingButton>  
-    </div>
+        <UpcommingButton onClick={gotoupcomming}>
+            <CommonDiv >개봉 예정중인</CommonDiv>
+        </UpcommingButton>  
+    </MoviebackgroundDiv>
   </MovieDiv>
 
 </div>   
@@ -68,9 +68,17 @@ padding-left:5px;
 padding-top:5px;
 `;
 
+const MoviebackgroundDiv=styled.div`
+display:flex; 
+flex-shrink:3; 
+flex-direction:row;
+justify-content:space-evenly;
+padding-left:50px;
+padding-top:30px;
+`;
 
 const NowplayingButton = styled.button `
-  width: 200px;
+  width: 250px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -81,7 +89,7 @@ const NowplayingButton = styled.button `
 `;
 
 const PopularButton = styled.button `
-  width: 200px;
+  width: 250px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -92,7 +100,7 @@ const PopularButton = styled.button `
 `;
 
 const TopratedButton = styled.button `
-  width: 200px;
+  width: 250px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -103,7 +111,7 @@ const TopratedButton = styled.button `
 `;
 
 const UpcommingButton = styled.button `
-  width: 200px;
+  width: 250px;
   height: 80px;
   display: flex;
   flex-direction: column;

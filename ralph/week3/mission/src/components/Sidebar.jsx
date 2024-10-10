@@ -10,7 +10,7 @@ const  Sidebar = ()=> {
       <div>
         <SearchLink to='/search'><IoSearchCircleSharp />검색</SearchLink>
       </div>
-         <MovieLink to='/movie'><BiSolidCameraMovie />영화</MovieLink>
+        <MovieLink to='/movie'><BiSolidCameraMovie />영화</MovieLink>
     </div>   
   </BackgroundDiv>    
   )

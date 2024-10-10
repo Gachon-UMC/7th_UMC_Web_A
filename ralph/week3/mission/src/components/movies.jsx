@@ -11,7 +11,7 @@ export default function Movies ({key,movie}){
       </div>
       <div className='movie-info'>
          <h4>{movie.title}</h4>
-         <span>{movie.vote_average}</span>
+         <span>{movie.release_date}</span>
        </div>
       </div> 
   );

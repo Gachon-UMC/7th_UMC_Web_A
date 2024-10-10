@@ -14,4 +14,7 @@ position:absolute;
 top:100px;
 left:100px;
 color:white;
+font-size:100px;
+padding-left:5px;
+padding-top:5px;
 `;

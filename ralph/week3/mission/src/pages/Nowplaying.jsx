@@ -1,7 +1,8 @@
 import Movies from "../components/movies";
-// 
 import {useEffect, useState} from "react";
 import axios from "axios";
+
+import styled from "styled-components";
 
 const Nowplaying  = () => {
     const [movies, setMovies] = useState([])
@@ -19,16 +20,22 @@ const Nowplaying  = () => {
     }, []);
 
     return (
-        <div>
-        // Optional Chaining 활용
+        <NowplayingDiv>
             {movies.data?.results.map((movie) => (
                 <Movies key={movie.id} movie={movie}/>
             ))}
-        </div>
+        </NowplayingDiv>
     )
 };
 
 export default Nowplaying ;
 
-
+//css
+const NowplayingDiv =styled.div `
+background-color:pink;
+margin-left:100px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`;
 

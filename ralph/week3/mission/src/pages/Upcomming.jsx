@@ -1,9 +1,10 @@
 import Movies from "../components/movies";
-// 
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const Nowplaying  = () => {
+import styled from "styled-components";
+
+const Upcomming = () => {
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
@@ -19,16 +20,22 @@ const Nowplaying  = () => {
     }, []);
 
     return (
-        <div>
-        // Optional Chaining 활용
+        <UpcommingDiv>
             {movies.data?.results.map((movie) => (
                 <Movies key={movie.id} movie={movie}/>
             ))}
-        </div>
+        </UpcommingDiv>
     )
 };
 
-export default Nowplaying ;
+export default Upcomming ;
 
 
-
+//css
+const UpcommingDiv =styled.div `
+background-color:pink;
+margin-left:100px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`;

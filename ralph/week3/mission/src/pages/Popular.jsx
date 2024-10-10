@@ -1,10 +1,10 @@
 import Movies from "../components/movies";
-// 
 import {useEffect, useState} from "react";
 import axios from "axios";
+
 import styled from "styled-components";
 
-const Nowplaying  = () => {
+const Popular  = () => {
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
@@ -21,7 +21,6 @@ const Nowplaying  = () => {
 
     return (
         <PopularDiv>
-        // Optional Chaining 활용
             {movies.data?.results.map((movie) => (
                 <Movies key={movie.id} movie={movie}/>
             ))}
@@ -29,12 +28,15 @@ const Nowplaying  = () => {
     )
 };
 
-export default Nowplaying ;
+export default Popular;
 
 //css
 
 const PopularDiv =styled.div `
 background-color:pink;
 margin-left:100px;
-`
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`;
 
