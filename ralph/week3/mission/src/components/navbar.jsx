@@ -6,13 +6,21 @@ const Navbar = ()=> {
   const navigate = useNavigate()
   return (
     <nav>
-        <Link id="a" to={'/'} style={{ 
+      <Link id="a" to={'/'} 
+        style={{ 
           textDecoration: "none", 
           fontSize:"40px",
-          marginTop:"8px"}}>JUNGCHA</Link>
+          marginTop:"8px"}}
+          >JUNGCHA</Link>
         <button id="button" onClick={() => navigate('/login')}>로그인</button>
         <button id="signup" onClick={() => navigate('/signup')}>회원가입</button>
-    </nav>
+   </nav>
   )
 }
 export default Navbar;
+
+
+
+//css
+
+//nav 태그는 style-components 가 적용이 안되나 ? 왜 여기선 안된거지?

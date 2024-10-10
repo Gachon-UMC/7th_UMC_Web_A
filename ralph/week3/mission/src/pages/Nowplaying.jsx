@@ -19,15 +19,16 @@ const Nowplaying  = () => {
     }, []);
 
     return (
-        <>
+        <div>
         // Optional Chaining 활용
             {movies.data?.results.map((movie) => (
                 <Movies key={movie.id} movie={movie}/>
             ))}
-        </>
+        </div>
     )
 };
 
 export default Nowplaying ;
+
 
 

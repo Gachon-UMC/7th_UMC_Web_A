@@ -16,4 +16,3 @@ export default function Movies ({key,movie}){
       </div> 
   );
 }
-

@@ -26,55 +26,49 @@ const Movie= ()=> {
   position:"static"  // 부모 노드 
     }}>
 
-  <div style={{
-      width:"91.5%",
-      height:"86%",
-      backgroundColor:"black" ,
-      position:"absolute",
-      top:"100px",
-      left:"100px",
-      color:"white",
-      fontSize:"30px",
-      paddingLeft:"5px",
-      paddingTop:"5px"
-    }}>
+  <MovieDiv>
       카테고리
     <div style={{display:"flex", flexShrink:"3", flexDirection:"row", justifyContent:"space-evenly",paddingLeft:"50px",paddingTop:"30px"}}>
 
       <NowplayingButton onClick={gotonowplaying}>
-     
-        <div style={{fontSize:"20px",
-          fontWeight:"bold", color:"white"
-        }}>현재 상영중인</div>
+          <CommonDiv >현재 상영중인</CommonDiv>
       </NowplayingButton>
 
       <PopularButton onClick={gotoupopular} > 
-        <div style={{fontSize:"20px",
-          fontWeight:"bold" , color:"white"
-        }}>인기있는</div>
+          <CommonDiv >인기있는</CommonDiv>
       </PopularButton>
 
       <TopratedButton onClick={gotouptoprated} >
-        <div style={{fontSize:"20px",
-          fontWeight:"bold" , color:"white"
-        }}>높은 평가를 받은</div>
+          <CommonDiv >높은 평가를 받은</CommonDiv>
       </TopratedButton>
 
-
       <UpcommingButton onClick={gotoupcomming}>
-        <div style={{fontSize:"20px",
-          fontWeight:"bold" , color:"white"
-        }}>개봉 예정중인</div>
+          <CommonDiv >개봉 예정중인</CommonDiv>
       </UpcommingButton>  
     </div>
-  </div>
+  </MovieDiv>
 
 </div>   
   );
 }
 export default Movie;
 
+
 //css
+const MovieDiv = styled.div`
+width:91.5%;
+height:86%;
+background-color:black;
+position:absolute;
+top:100px;
+left:100px;
+color:white;
+font-size:30px;
+padding-left:5px;
+padding-top:5px;
+`;
+
+
 const NowplayingButton = styled.button `
   width: 200px;
   height: 80px;
@@ -117,4 +111,10 @@ const UpcommingButton = styled.button `
   background-image: url(${flower4});
   background-size: cover;
   border-color: white;
+`;
+
+const CommonDiv =styled.div`
+font-size:20px;
+font-weight:bold; 
+color:white;
 `;
