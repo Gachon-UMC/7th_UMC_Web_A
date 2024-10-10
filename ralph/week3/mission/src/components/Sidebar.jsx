@@ -1,29 +1,43 @@
 import {Link} from "react-router-dom";
 import { IoSearchCircleSharp } from "react-icons/io5";
 import { BiSolidCameraMovie } from "react-icons/bi";
+import styled from "styled-components";
 
 const  Sidebar = ()=> {
   return (
-    <div style={{
-      marginTop:'30px',
-      backgroundColor:"rgb(35,35,35)",
-      display:"inline-block"
-    }}>
+    <BackgroundDiv >
+    <div>
       <div>
-      <div>
-        <Link style={{
-          fontSize:"25px",
-          margin:'10px',
-          textDecoration: "none",
-          color:"white"}} to='/search'><IoSearchCircleSharp />검색</Link>
+        <SearchLink to='/search'><IoSearchCircleSharp />검색</SearchLink>
       </div>
-      <Link style={{
-          fontSize:"25px",
-          margin:'10px',
-          textDecoration: "none",
-          color:"white"}} to='/movie'><BiSolidCameraMovie />영화</Link>
+         <MovieLink to='/movie'><BiSolidCameraMovie />영화</MovieLink>
     </div>   
-  </div>    
+  </BackgroundDiv>    
   )
 }
 export default Sidebar;
+
+
+//css (styled-components)
+const BackgroundDiv =styled.div`
+margin-top:30px;
+background-color:rgb(35,35,35);
+display:inline-block;
+`;
+
+const SearchLink= styled(Link) `
+font-size:25px;
+margin:10px;
+text-decoration:none;
+color:white;
+`;
+ 
+// Link 태그 stylesheet 적용할 때는 (Link) 이런식으로 조금 다름
+const MovieLink= styled(Link) `
+font-size:25px;
+margin:10px;
+text-decoration:none;
+color:white;
+`;
+
+

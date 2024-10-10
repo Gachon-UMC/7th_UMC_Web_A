@@ -4,7 +4,8 @@ import flower3 from "../images/flower3.png"
 import flower4 from "../images/flower4.png"
 import { useNavigate } from "react-router-dom";
 import React from 'react';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 const Movie= ()=> {
   const navigate=useNavigate();
   const gotonowplaying =() =>{
@@ -40,66 +41,80 @@ const Movie= ()=> {
       카테고리
     <div style={{display:"flex", flexShrink:"3", flexDirection:"row", justifyContent:"space-evenly",paddingLeft:"50px",paddingTop:"30px"}}>
 
-      <button onClick={gotonowplaying} style={{
-      width:"200px",
-      height: "80px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "end",
-      backgroundImage: `url(${flower1})`,
-      backgroundSize: "cover",
-      borderColor:"white"}} >
+      <NowplayingButton onClick={gotonowplaying}>
+     
         <div style={{fontSize:"20px",
           fontWeight:"bold", color:"white"
         }}>현재 상영중인</div>
-      </button>
+      </NowplayingButton>
 
-      <button onClick={gotoupopular} style={{
-      width:"200px",
-      height: "80px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "end",
-      backgroundImage: `url(${flower2})`,
-      backgroundSize: "cover",
-      borderColor:"white"}} > 
+      <PopularButton onClick={gotoupopular} > 
         <div style={{fontSize:"20px",
           fontWeight:"bold" , color:"white"
         }}>인기있는</div>
-      </button>
+      </PopularButton>
 
-      <button onClick={gotouptoprated} style={{
-      width:"200px",
-      height: "80px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "end",
-      backgroundImage: `url(${flower3})`,
-      backgroundSize: "cover",
-      borderColor:"white"}} >
+      <TopratedButton onClick={gotouptoprated} >
         <div style={{fontSize:"20px",
           fontWeight:"bold" , color:"white"
         }}>높은 평가를 받은</div>
-      </button>
+      </TopratedButton>
 
-      <button onClick={gotoupcomming} style={{
-      width:"200px",
-      height: "80px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "end",
-      backgroundImage: `url(${flower4})`,
-      backgroundSize: "cover",
-      borderColor:"white"}} >
+
+      <UpcommingButton onClick={gotoupcomming}>
         <div style={{fontSize:"20px",
           fontWeight:"bold" , color:"white"
         }}>개봉 예정중인</div>
-      </button>  
+      </UpcommingButton>  
     </div>
   </div>
 
 </div>   
   );
 }
-
 export default Movie;
+
+//css
+const NowplayingButton = styled.button `
+  width: 200px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-image: url(${flower1});
+  background-size: cover;
+  border-color: white;
+`;
+
+const PopularButton = styled.button `
+  width: 200px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-image: url(${flower2});
+  background-size: cover;
+  border-color: white;
+`;
+
+const TopratedButton = styled.button `
+  width: 200px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-image: url(${flower3});
+  background-size: cover;
+  border-color: white;
+`;
+
+const UpcommingButton = styled.button `
+  width: 200px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-image: url(${flower4});
+  background-size: cover;
+  border-color: white;
+`;

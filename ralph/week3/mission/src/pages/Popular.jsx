@@ -1,17 +1,40 @@
-import React from 'react'
-const IMG_BASE_URL ="https://image.tmdb.org/t/p/w500/"
+import Movies from "../components/movies";
+// 
+import {useEffect, useState} from "react";
+import axios from "axios";
+import styled from "styled-components";
 
-export default function Popular ({title,poster_path,vote_average}){
+const Nowplaying  = () => {
+    const [movies, setMovies] = useState([])
 
-  return (
-   <div className='movie-container'>
-    <div class='a'>
-      <img src={IMG_BASE_URL + poster_path}></img>
-      </div>
-      <div className='movie-info'>
-         <h4>{title}</h4>
-         <span>{vote_average}</span>
-       </div>
-      </div> 
-  );
-}
+    useEffect(() => {
+        const getMovies = async () => {
+            const movies = await axios.get(`https://api.themoviedb.org/3/movie/popular?language=ko&page=1&region=KR`, {
+                headers: {
+                    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZGIyMmUwZjc0YTcyZGRlMTMyYTQ1NWFiZjJlYzRkZiIsIm5iZiI6MTcyODU0NzQyNC4yMDY3MDYsInN1YiI6IjY2ZmZlOGZjNmZjNzRlNTc1NmY4MGFjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NeTrR8-D9iPMqPjFODW65DE7Ykve__qerLAGExyRCIs`
+                }
+            })
+            setMovies(movies);
+        }
+        getMovies()
+    }, []);
+
+    return (
+        <PopularDiv>
+        // Optional Chaining 활용
+            {movies.data?.results.map((movie) => (
+                <Movies key={movie.id} movie={movie}/>
+            ))}
+        </PopularDiv>
+    )
+};
+
+export default Nowplaying ;
+
+//css
+
+const PopularDiv =styled.div `
+background-color:pink;
+margin-left:100px;
+`
+
