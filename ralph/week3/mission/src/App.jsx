@@ -61,10 +61,11 @@ function App ()
   return (
 <div>
   <div style={{marginLeft:"10px"}}>
-    <RouterProvider router ={router} /> //RouterProvider 컴포넌트는 라우터 객체를 받아서 앱에 라우팅을 활성화 
-                                        // 이를 통해 사용자는 정의된 경로에 따라 해당하는 페이지로 네비게이션해서 경로에 맞는 컴포넌트를 렌더링.
-  </div> 
-</div>
+    <RouterProvider router ={router} />      
+  </div>    
+</div>                                //RouterProvider 컴포넌트는 라우터 객체를 받아서 앱에 라우팅을 활성화 
+                                      //이를 통해 사용자는 정의된 경로에 따라 해당하는 페이지로 네비게이션해서 경로에 맞는 컴포넌트를 렌더링. 
+
 );
 }
 export default App;
