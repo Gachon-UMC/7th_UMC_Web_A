@@ -10,8 +10,12 @@ const Header = () => {
                 Moorad
             </div>
             <div className="account">
-                <div className="login">로그인</div>
-                <div className="signup">회원가입</div>
+                <div className="login" onClick={() => navigate("/signin")}>
+                    로그인
+                </div>
+                <div className="signup" onClick={() => navigate("/signup")}>
+                    회원가입
+                </div>
             </div>
         </HeaerContainer>
     );
@@ -59,9 +63,17 @@ const HeaerContainer = styled.header`
             color: white;
             cursor: pointer;
         }
+        & > .login:hover {
+            color: blue;
+        }
 
         & > .signup {
             background-color: red;
+            border-radius: 10px;
+        }
+        & > .signup:hover {
+            background-color: white;
+            color: red;
             border-radius: 10px;
         }
     }

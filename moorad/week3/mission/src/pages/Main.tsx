@@ -9,38 +9,22 @@ import Category from "./Category";
 interface URLObjType {
     [key: string]: { url: string };
 }
+const lang = "ko-KR";
 
 const urlObj: URLObjType = {
     nowPlaying: {
-        url: "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+        url: `https://api.themoviedb.org/3/movie/now_playing?language=${lang}&page=1`,
     },
     topRated: {
-        url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+        url: `https://api.themoviedb.org/3/movie/top_rated?language=${lang}&page=1`,
     },
     upComing: {
-        url: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+        url: `https://api.themoviedb.org/3/movie/upcoming?language=${lang}&page=1`,
     },
     popular: {
-        url: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+        url: `https://api.themoviedb.org/3/movie/popular?language=${lang}&page=1`,
     },
 };
-
-interface MovieType {
-    adult: boolean;
-    backdrop_path: string | null;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-}
 
 const Main = () => {
     const standard = useRecoilValue(sortState);
@@ -49,7 +33,7 @@ const Main = () => {
         <>
             <Category></Category>
             <MainContents>
-                {movies?.map((movie: MovieType) => {
+                {movies?.map((movie) => {
                     return <Card key={movie.id} movie={movie}></Card>;
                 })}
             </MainContents>

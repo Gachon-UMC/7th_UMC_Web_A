@@ -29,9 +29,9 @@ const Category = () => {
         <ButtonContainer>
             {buttonObj.map((el, idx) => {
                 return (
-                    <button key={idx} onClick={() => setSortState(el.value)}>
+                    <Button key={idx} onClick={() => setSortState(el.value)}>
                         {el.name}
-                    </button>
+                    </Button>
                 );
             })}
         </ButtonContainer>
@@ -45,8 +45,9 @@ const ButtonContainer = styled.div`
     padding-top: 100px;
     width: 100%;
     height: 50%;
-    border: 1px solid red;
+    display: flex;
+    gap: 20px;
 `;
 const Button = styled.button`
-    width: 400px;
+    width: 100px;
 `;

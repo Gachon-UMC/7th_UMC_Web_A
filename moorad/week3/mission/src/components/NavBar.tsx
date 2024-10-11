@@ -7,9 +7,6 @@ const NavBar = () => {
             <div className="nav-link">
                 <StyledLink to={"/search"}>검색</StyledLink>
             </div>
-            <div className="nav-link">
-                <StyledLink to={"/movies"}>카테고리</StyledLink>
-            </div>
         </NavContainer>
     );
 };

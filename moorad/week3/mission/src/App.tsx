@@ -8,6 +8,8 @@ import RootLayout from "./layout/RootLayout";
 import Search from "./pages/Search";
 import { RecoilRoot } from "recoil";
 import Category from "./pages/Category";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Main /> },
             {
-                path: "movies/:movieID",
+                path: "movies",
                 element: <Movies />,
             },
             {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
             {
                 path: "category",
                 element: <Category />,
+            },
+            {
+                path: "signin",
+                element: <SignIn />,
+            },
+            {
+                path: "signup",
+                element: <SignUp />,
             },
         ],
     },
