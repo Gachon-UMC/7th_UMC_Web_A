@@ -8,9 +8,11 @@ import styled from 'styled-components';
 
 const Movie= ()=> {
   const navigate=useNavigate();
+                                      // 각각의 함수를 정의해서 각 함수가 호출되면 저 경로로 이동하도록 만들었다 
+                                      // 이 경로들은 app.jsx 에서 children이라는 속성안에 자식 경로를 만들어서 표기
   const gotonowplaying =() =>{
     navigate('/nowplaying');
-  }
+  }                            
   const gotoupcomming =() =>{
     navigate('/upcomming');
   }

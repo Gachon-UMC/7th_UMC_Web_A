@@ -27,8 +27,18 @@ const Popular  = () => {
         </PopularDiv>
     )
 };
-
+    
 export default Popular;
+
+
+
+
+
+
+
+
+
+
 
 //css
 

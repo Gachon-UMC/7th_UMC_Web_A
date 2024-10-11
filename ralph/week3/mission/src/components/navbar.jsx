@@ -6,14 +6,15 @@ import styled from "styled-components";
 const Navbar = ()=> {
   const navigate = useNavigate()
   return (
-    <NavbarNav>
+    <NavbarNav>    
       <LogoLink to={'/'} >JUNGCHA</LogoLink>  
-        <LoginButton onClick={() => navigate('/login')}>로그인</LoginButton>
-        <SignupButton onClick={() => navigate('/signup')}>회원가입</SignupButton>
-
+      <LoginButton onClick={() => navigate('/login')}>로그인</LoginButton>    //navigate 설명은 movie 컨포넌트 참고
+      <SignupButton onClick={() => navigate('/signup')}>회원가입</SignupButton>
    </NavbarNav>
   )
 }
+        //<nav>태그 : 다른 웹 페이지로 연결하거나, 현재 웹 페이지의 콘텐츠 내부로 연결되는 탐색(navigation)을 위한 링크(links)가 있는 영역
+        //navigate 설명은 movie 컨포넌트 참고
 export default Navbar;
 
 

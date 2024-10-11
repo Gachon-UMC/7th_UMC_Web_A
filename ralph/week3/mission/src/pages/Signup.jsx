@@ -14,6 +14,12 @@ export default Signup
 
 
 
+
+
+
+
+
+
 //css
 const SignupDiv = styled.div`
 width:91.5%;

@@ -8,6 +8,14 @@ const NotFound = ()=> {
 export default NotFound;  
 
 
+
+
+
+
+
+
+
+
 //css
 const NotfoundDiv = styled.div`
 position:absolute;

@@ -13,6 +13,15 @@ const search= ()=> {
 export default search;
 
 
+
+
+
+
+
+
+
+
+
 //css
 const SearchDiv = styled.div`
 width:91.5%;

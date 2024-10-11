@@ -30,6 +30,15 @@ const Toprated  = () => {
 
 export default Toprated ;
 
+
+
+
+
+
+
+
+
+
 //css
 const TopratedDiv =styled.div `
 background-color:pink;

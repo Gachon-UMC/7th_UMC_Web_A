@@ -16,7 +16,7 @@ const  Sidebar = ()=> {
   )
 }
 export default Sidebar;
-
+                        //  여기도 App 컴포넌트에 있는 자식 요소에 있는 주소로 연결되어 있음
 
 //css (styled-components)
 const BackgroundDiv =styled.div`
