@@ -26,7 +26,9 @@ interface MovieType {
     vote_count: number;
 }
 
-// 함수 바깥에 있는 변수들도 리렌더링이 되는지
+// URL이나 dependencies 바뀌면 useEffect 발동
+// 사실 dependencies에 넣어둔 standard(전역 변수)가 바뀌면 url이 바뀌는 거라 굳이 두 개 다 넣어줄 필요는 없는데
+// 이후에 dependencies에 뭐 들어갈지 모르니까 (ex. page) 일단 dependencies 넣어둠
 
 const useGetAPI = (URL: string, dependencies: any[] = []) => {
     const [movies, setMovies] = useState<MovieType[]>([]);
@@ -45,8 +47,8 @@ const useGetAPI = (URL: string, dependencies: any[] = []) => {
         };
         getMovies();
     }, [URL, ...dependencies]);
-    console.log(movies);
 
+    // 상태 반환
     return movies;
 };
 
