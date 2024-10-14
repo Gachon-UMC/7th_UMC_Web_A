@@ -6,7 +6,6 @@ const useCustomfetch = (url) => {
   const [isLoading, setIsLoading]= useState(false);
   const [isError, setIsError]= useState(false);
 
-  console.log(axiosInstance); 
   useEffect(() => {
     const fetchData = async () =>  {
       setIsLoading(true);

@@ -1,10 +1,8 @@
 import Movies from "../components/movies";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import useCustomfetch from "../hooks/useCustomfetch.js";
 
 import styled from "styled-components";
-import { axiosInstance } from "../apis/axios-instance.js";
-import useCustomfetch from "../hooks/useCustomfetch.js";
+
 
 const Nowplaying  = () => {
     const {data:movies,isLoading,isError}=useCustomfetch(`/movie/now_playing?language=ko&page=1&region=KR`)

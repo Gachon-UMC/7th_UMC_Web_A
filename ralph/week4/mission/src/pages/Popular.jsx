@@ -1,24 +1,17 @@
 import Movies from "../components/movies";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import useCustomfetch from "../hooks/useCustomfetch";
 
 import styled from "styled-components";
 
 const Popular  = () => {
-    const [movies, setMovies] = useState([])
-
-    useEffect(() => {
-        const getMovies = async () => {
-            const movies = await axios.get(`https://api.themoviedb.org/3/movie/popular?language=ko&page=1&region=KR`, {
-                headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZGIyMmUwZjc0YTcyZGRlMTMyYTQ1NWFiZjJlYzRkZiIsIm5iZiI6MTcyODU0NzQyNC4yMDY3MDYsInN1YiI6IjY2ZmZlOGZjNmZjNzRlNTc1NmY4MGFjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NeTrR8-D9iPMqPjFODW65DE7Ykve__qerLAGExyRCIs`
-                }
-            })
-            setMovies(movies);
-        }
-        getMovies()
-    }, []);
-
+    
+    const {data:movies,isLoading,isError}=useCustomfetch(`/movie/popular?language=ko&page=1&region=KR`)
+    if(isLoading){
+        return <div style={{color:"white"}}>로딩중입니다..</div>
+    }
+    if(isError){
+        return <div style={{color:"white"}}>에러를</div>
+    }
     return (
         <PopularDiv>
             {movies.data?.results.map((movie) => (
