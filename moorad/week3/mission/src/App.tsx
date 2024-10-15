@@ -16,6 +16,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <RootLayout />,
         // Q. 기본 경로에만 넣어주면 되나 ?
+        // A. 기본 경로에만 넣어주면 상위 경로 하위에 속한 모든 경로에서 발생하는 에러가 NotFound 컴포넌트로 처리됨
         errorElement: <NotFound />,
         children: [
             { index: true, element: <Main /> },
