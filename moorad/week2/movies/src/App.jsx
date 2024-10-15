@@ -1,9 +1,5 @@
-// import { useState } from "react";
 import { MOVIES } from "../mocks/movies";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Card from "./components/MovieDetail";
-
-import "./App.css";
+import { useNavigate } from "react-router-dom";
 
 function App() {
     const datas = MOVIES.results;
@@ -15,10 +11,12 @@ function App() {
                 {datas.map((data) => {
                     return (
                         <div
-                            id={data.id}
+                            key={data.id}
                             className="relative w-[130px] h-[200px] rounded-lg overflow-hidden cursor-pointer"
                             onClick={() =>
-                                navigate(`/detail/${data.id}`, { state: data })
+                                navigate(`/detail/${data.id}`, {
+                                    state: data,
+                                })
                             }
                         >
                             <img
