@@ -19,9 +19,11 @@ const MovieDetailPage = () => {
     return <div><h1 style={{ color: 'white' }}>에러 발생</h1></div>;
   }
 
-  // 영화 정보를 가져오지 못했을 때
+  // 영화 정보를 가져오지 못했을 때 처리
   if (!movieDetail) {
-    return <div><h1 style={{ color: 'white' }}>영화 정보를 불러올 수 없습니다.</h1></div>;
+    // movieDetail이 null이면 다음 코드 실행을 방지하고 기본 동작으로 돌아가도록 설정
+    console.log("movieDetail is null or undefined");
+    return null; // 아무것도 렌더링하지 않고 종료
   }
 
   return (
