@@ -45,6 +45,9 @@ const Sidebar = () => {
 
 export default Sidebar;
 
+
+// CSS
+
 // sidebar div 태그
 const StyledSidebar = styled.nav`
     width: 150px;

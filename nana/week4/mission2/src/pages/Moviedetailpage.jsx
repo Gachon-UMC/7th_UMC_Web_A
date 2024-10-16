@@ -72,6 +72,8 @@ const MovieDetailPage = () => {
 
 export default MovieDetailPage;
 
+
+// CSS
 // 전체 페이지 스타일
 const PageContainer = styled.div`
   display: flex;

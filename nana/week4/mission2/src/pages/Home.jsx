@@ -11,6 +11,7 @@ const HomePage = () => {
 export default HomePage;
 
 
+// CSS
 const StyledHomePage = styled.div`
     color: white;
 `

@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
-import Navbar from "./Navbar.jsx";
-import Sidebar from "./Sidebar.jsx";
+import Navbar from "../components/Navbar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
 import styled from 'styled-components';
 
 const RootLayout = () => {
@@ -19,6 +19,8 @@ const RootLayout = () => {
 
 export default RootLayout;
 
+
+// CSS
 
 // sidebar와 outlet을 묶는 div styled-component
 const LayoutContainer = styled.div`

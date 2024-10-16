@@ -39,6 +39,8 @@ const CategoryListPage = () => {
 
 export default CategoryListPage;
 
+
+// CSS
 const PageContainer = styled.div`
     margin-left: 30px;
 `

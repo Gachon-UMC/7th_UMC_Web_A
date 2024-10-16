@@ -5,7 +5,7 @@ import GlobalStyle from './components/Globalstyled.jsx';
 
 // 1. 만든 페이지들을 import
 import HomePage from "./pages/Home.jsx";
-import NotFound from "./pages/Not-found.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import RootLayout from './layout/Root-layout.jsx';
 import LoginPage from './pages/Loginpage.jsx';
 import SignupPage from './pages/Signuppage.jsx';
@@ -13,10 +13,10 @@ import SearchPage from './pages/Searchpage.jsx';
 import CategoryPage from './pages/Categorypage.jsx';
 import CategoryListPage from './pages/category/Categorylistpage.jsx';
 
-import NowPlaying from './pages/category/Nowplayingpage.jsx';
-import Popular from './pages/category/Popularpage.jsx';
-import TopRated from './pages/category/Topratedpage.jsx';
-import UpComing from './pages/category/Upcomingpage.jsx';
+import NowPlaying from './pages/category/NowPlaying.jsx';
+import Popular from './pages/category/Popular.jsx';
+import TopRated from './pages/category/TopRated.jsx';
+import UpComing from './pages/category/UpComing.jsx';
 
 import MovieDetailPage from './pages/Moviedetailpage.jsx';
 

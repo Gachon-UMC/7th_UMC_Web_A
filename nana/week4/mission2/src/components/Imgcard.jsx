@@ -24,6 +24,8 @@ const ImgCard = ({ movie }) => {
 
 export default ImgCard;
 
+
+// CSS
 const StyledImgCarddiv = styled.div`
     width: 140px;
     margin-bottom: 20px;

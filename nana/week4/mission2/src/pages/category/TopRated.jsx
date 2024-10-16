@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // MoviesPage 컴포넌트
 const MoviesPage = () => {
 
-  const {data: movies, isLoading, isError} = useCustomFetch(`/movie/popular?language=ko-KR&page=1`);
+  const {data: movies, isLoading, isError} = useCustomFetch(`/movie/top_rated?language=ko-KR&page=1`);
 
   if(isLoading){
     return <div>
@@ -34,6 +34,8 @@ const MoviesPage = () => {
 
 export default MoviesPage;
 
+
+// CSS
 const CardsContainer = styled.div`
     display: flex;
     flex-wrap: wrap; /* 화면이 작아질 때 자동으로 줄바꿈 */
