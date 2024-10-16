@@ -54,7 +54,7 @@ const router = createBrowserRouter([ // router 객체 생성
       path:'/toprated',             // "/toprated" 경로일 때 Toprated 컴포넌트를 렌더링
       element:<Toprated />
     },{
-      path: '/movies/:movieId',
+      path: '/movies/:movieId',     // 동적 라우팅은 이용
       element: <MovieDetails />
   }
   ]
