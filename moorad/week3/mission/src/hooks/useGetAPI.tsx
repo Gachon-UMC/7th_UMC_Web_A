@@ -30,6 +30,12 @@ interface MovieType {
 // 사실 dependencies에 넣어둔 standard(전역 변수)가 바뀌면 url이 바뀌는 거라 굳이 두 개 다 넣어줄 필요는 없는데
 // 이후에 dependencies에 뭐 들어갈지 모르니까 (ex. page) 일단 dependencies 넣어둠
 
+/**
+ * Custom Hook을 이용한 렌더링
+ * @param {string} URL  : urlObj에서 전역 상태 변수를 key 값으로 url value를 넘겨줌
+ * @param {RecoilState} dependencies : useEffect 함수 의존성 배열에 넘겨줄 값 -> standard라는 전역 상태 변수 넣어줌 , 즉 Category Component에서 버튼 클릭으로 전역 상태 변수가 변경되면 새로운 API 호출
+ * @return {Array}
+ */
 const useGetAPI = (URL: string, dependencies: any[] = []) => {
     const [movies, setMovies] = useState<MovieType[]>([]);
 

@@ -54,4 +54,5 @@ const ButtonContainer = styled.div`
 `;
 const Button = styled.button`
     width: 100px;
+    cursor: pointer;
 `;
