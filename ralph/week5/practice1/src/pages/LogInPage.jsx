@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 const LogInPage = () => {
@@ -12,6 +12,17 @@ const LogInPage = () => {
     const onsubmit = (data) => {
         console.log("data", data);
     };
+    // const [emailvalid, setEmailValid] = useState(false);
+    // const [pwvalid, setPwValid] = useState(false);
+    // const [notAllow, setNotAllow] = useState(true);
+
+    // useEffect(() => {
+    //     if (data.email && data.password) {
+    //         setNotAllow(false);
+    //         return;
+    //     }
+    //     setNotAllow(true);
+    // }, [emailvalid,pwvalid]);
     return (
         <DivStyle>
             <FormStyle onSubmit={handleSubmit(onsubmit)}>
@@ -51,7 +62,9 @@ const LogInPage = () => {
                         )}
                 </DivPasswordStyle>
 
-                <ButtonStyle type="submit">로그인</ButtonStyle>
+                <ButtonStyle type="submit" id="btn_id">
+                    로그인
+                </ButtonStyle>
             </FormStyle>
         </DivStyle>
     );
