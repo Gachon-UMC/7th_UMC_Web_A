@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-function SignUpPage() {
+function signUpPage() {
     const schema = yup.object().shape({
         email: yup
             .string()
@@ -21,8 +21,11 @@ function SignUpPage() {
             .string()
             .oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다")
             .required("비밀번호를 한번 더 입력해 주세요"),
+        sex: yup
+            .string()
+            .oneOf(["남자", "여자"], "성별은 남자 또는 여자만 선택 가능합니다.")
+            .required("꼭 입력해주세요"),
     });
-
     const {
         register,
         handleSubmit,
@@ -31,25 +34,23 @@ function SignUpPage() {
         resolver: yupResolver(schema),
     });
 
-    const password = useRef(); // 이게 있어서 submit 버튼을 눌렀을 때 결과가 잘 나오고 있는 것
-
     const onsubmit = (data) => {
         console.log("data", data);
     };
 
     return (
         <Divmain>
-            <form onSubmit={handleSubmit(onsubmit)}>
+            <form onSubmit={handleSubmit(onsubmit)} noValidate>
                 <LabelTtile>회원가입</LabelTtile>
 
                 <DivEmailStyle>
                     <InputEmailStyle
                         name="email"
-                        type="text"
+                        type="email"
                         placeholder="이메일"
                         {...register("email")}
                     />
-                    <div style={{ color: "red" }}>{errors.email?.message}</div>
+                    <Diverrorstyle>{errors.email?.message}</Diverrorstyle>
                 </DivEmailStyle>
                 <DivPasswordStyle>
                     <InputPasswordStyle
@@ -58,9 +59,7 @@ function SignUpPage() {
                         placeholder="비밀번호"
                         {...register("password")}
                     />
-                    <div style={{ color: "red" }}>
-                        {errors.password?.message}
-                    </div>
+                    <Diverrorstyle>{errors.password?.message}</Diverrorstyle>
                 </DivPasswordStyle>
                 <DivcheckPasswordStyle>
                     <InputcheckPasswordStyle
@@ -69,17 +68,27 @@ function SignUpPage() {
                         placeholder="비밀번호 확인"
                         {...register("checkPassword")}
                     />
-                    <div style={{ color: "red" }}>
+                    <Diverrorstyle>
                         {errors.checkPassword?.message}
-                    </div>
+                    </Diverrorstyle>
                 </DivcheckPasswordStyle>
+                <DivSexStyle>
+                    <InputSexStyle
+                        name="sex"
+                        type="text"
+                        placeholder="성별( 남자 또는 여자 )"
+                        {...register("sex")}
+                    />
+
+                    <Diverrorstyle>{errors.sex?.message}</Diverrorstyle>
+                </DivSexStyle>
                 <ButtonStyle type="submit">제출</ButtonStyle>
             </form>
         </Divmain>
     );
 }
 
-export default SignUpPage;
+export default signUpPage;
 
 //css
 const Divmain = styled.div`
@@ -117,6 +126,17 @@ const DivPasswordStyle = styled.div`
     align-items: center;
     gap: 0.5em;
 `;
+const InputPasswordStyle = styled.input`
+    display: flex;
+    flexdirection: column;
+    width: 250px;
+    text-align: center;
+    margin: 10px;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 0.5em;
+`;
+
 const InputcheckPasswordStyle = styled.input`
     display: flex;
     flexdirection: column;
@@ -127,6 +147,7 @@ const InputcheckPasswordStyle = styled.input`
     border: 1px solid black;
     border-radius: 0.5em;
 `;
+
 const DivcheckPasswordStyle = styled.div`
     display: flex;
     flex-direction: column;
@@ -134,7 +155,16 @@ const DivcheckPasswordStyle = styled.div`
     align-items: center;
     gap: 0.5em;
 `;
-const InputPasswordStyle = styled.input`
+
+const DivSexStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+`;
+
+const InputSexStyle = styled.input`
     display: flex;
     flexdirection: column;
     width: 250px;
@@ -153,4 +183,8 @@ const ButtonStyle = styled.button`
     border: 1px solid black;
     border-radius: 0.5em;
     background-color: pink;
+`;
+
+const Diverrorstyle = styled.div`
+    color: red;
 `;
