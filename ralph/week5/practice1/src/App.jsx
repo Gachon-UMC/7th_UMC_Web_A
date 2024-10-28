@@ -1,5 +1,5 @@
 import Homepage from "./pages/home";
-import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from "./pages/Signup";
 import NotFound from "./pages/not-found";
 import Search from "./pages/search";
 import Movie from "./pages/movie";
@@ -9,7 +9,7 @@ import Upcomming from "./pages/Upcomming";
 import Toprated from "./pages/Toprated";
 import Popular from "./pages/Popular";
 import Nowplaying from "./pages/Nowplaying";
-import LogInPage from "./pages/LogInPage";
+import LogInPage from "./pages/Login";
 const router = createBrowserRouter([
     // router 객체 생성
     {

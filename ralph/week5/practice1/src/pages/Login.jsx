@@ -1,31 +1,50 @@
-import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import { useEffect } from "react";
 const LogInPage = () => {
+    const schema = yup.object().shape({
+        email: yup
+            .string()
+            .email()
+            .matches(
+                /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/,
+                "올바른 이메일 형식이 아닙니다. 다시 입력해주세요."
+            )
+            .required("이메일을 꼭 입력해주세요."),
+        password: yup
+            .string()
+            .min(8, "비밀번호는 8자리 이상이어야 합니다")
+            .max(16, "비밀번호는 16자리 이하여야 합니다")
+            .required(),
+    });
     const {
         watch,
         register,
         handleSubmit,
-        formState: { errors },
-    } = useForm();
+        formState: { errors, isValid },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     const onsubmit = (data) => {
         console.log("data", data);
     };
-    // const [emailvalid, setEmailValid] = useState(false);
-    // const [pwvalid, setPwValid] = useState(false);
-    // const [notAllow, setNotAllow] = useState(true);
-
-    // useEffect(() => {
-    //     if (data.email && data.password) {
-    //         setNotAllow(false);
-    //         return;
-    //     }
-    //     setNotAllow(true);
-    // }, [emailvalid,pwvalid]);
+    const emailValue = watch("email");
+    const passwordValue = watch("password");
+    const [notAllow, setNotAllow] = useState();
+    useEffect(() => {
+        if (emailValue && passwordValue && isValid) {
+            setNotAllow(false);
+        } else {
+            setNotAllow(true);
+        }
+    }, [emailValue, passwordValue]);
     return (
         <DivStyle>
-            <FormStyle onSubmit={handleSubmit(onsubmit)}>
+            <FormStyle onSubmit={handleSubmit(onsubmit)} novalidate>
                 <LabelTtile>로그인</LabelTtile>
 
                 <DivEmailStyle>
@@ -33,36 +52,26 @@ const LogInPage = () => {
                         name="email"
                         type="email"
                         placeholder="이메일을 입력해주세요"
-                        {...register("email", {
-                            required: true,
-                        })}
+                        {...register("email")}
                     />
-                    {errors.email && errors.email.type === "required" && (
-                        <SpanStyle>이메일을 입력해주세요</SpanStyle>
-                    )}
+                    <Pstyle>{errors.email?.message}</Pstyle>
                 </DivEmailStyle>
                 <DivPasswordStyle>
                     <InputPasswordStyle
                         name="password"
                         type="password"
                         placeholder="비밀번호를 입력해주세요"
-                        {...register("password", {
-                            required: true,
-                            minLength: 8,
-                            maxLength: 16,
-                        })}
+                        {...register("password", {})}
                     />
-                    {errors.password &&
-                        errors.password.type === "minLength" && (
-                            <SpanStyle>8자리 이상으로 입력해주세요</SpanStyle>
-                        )}
-                    {errors.password &&
-                        errors.password.type === "maxLength" && (
-                            <SpanStyle>16자리 이하로 입력해주세요</SpanStyle>
-                        )}
+                    <Pstyle>{errors.password?.message}</Pstyle>{" "}
                 </DivPasswordStyle>
 
-                <ButtonStyle type="submit" id="btn_id">
+                <ButtonStyle
+                    type="submit"
+                    id="btn_id"
+                    disabled={notAllow}
+                    notAllow={notAllow}
+                >
                     로그인
                 </ButtonStyle>
             </FormStyle>
@@ -104,12 +113,6 @@ const InputEmailStyle = styled.input`
     border-radius: 0.5em;
 `;
 
-const SpanStyle = styled.span`
-    color: red;
-    width: 250px;
-    font-size: 12px;
-`;
-
 const DivPasswordStyle = styled.div`
     display: flex;
     flex-direction: column;
@@ -130,11 +133,15 @@ const InputPasswordStyle = styled.input`
 `;
 
 const ButtonStyle = styled.button`
+    background-color: ${(props) => (props.notAllow ? "gray" : "pink")};
     width: 268px;
     text-align: center;
     margin: 10px;
     padding: 8px;
     border: 1px solid black;
     border-radius: 0.5em;
-    background-color: pink;
+`;
+
+const Pstyle = styled.p`
+    color: red;
 `;
