@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import Movie from "../components/movie";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import useCustomFetch from "../hooks/useCustomFetch";
 
-const TopRatedPage = () => {
+const PopularPage = () => {
   const {
     data: movies,
     isLoading,
     isError,
-  } = useCustomFetch("/movie/top_rated?language=ko-KR&page=1");
+  } = useCustomFetch("/movie/popular?language=ko-KR&page=1");
 
   if (isLoading) {
     return (
@@ -28,17 +26,18 @@ const TopRatedPage = () => {
   }
 
   return (
-    <TopRatedContainer>
+    <PopularContainer>
       {movies.data?.results.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
-    </TopRatedContainer>
+    </PopularContainer>
   );
 };
 
-export default TopRatedPage;
+export default PopularPage;
 
-const TopRatedContainer = styled.div`
+// CSS
+const PopularContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

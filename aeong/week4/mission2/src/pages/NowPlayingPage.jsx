@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import Movie from "../components/movie";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import useCustomFetch from "../hooks/useCustomFetch";
 
-const PopularPage = () => {
+const NowPlayingPage = () => {
   const {
     data: movies,
     isLoading,
     isError,
-  } = useCustomFetch("/movie/popular?language=ko-KR&page=1");
+  } = useCustomFetch("/movie/now_playing?language=ko-KR&page=1");
 
   if (isLoading) {
     return (
@@ -28,17 +26,18 @@ const PopularPage = () => {
   }
 
   return (
-    <PopularContainer>
+    <NowPlayingContainer>
       {movies.data?.results.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
-    </PopularContainer>
+    </NowPlayingContainer>
   );
 };
 
-export default PopularPage;
+export default NowPlayingPage;
 
-const PopularContainer = styled.div`
+// CSS
+const NowPlayingContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

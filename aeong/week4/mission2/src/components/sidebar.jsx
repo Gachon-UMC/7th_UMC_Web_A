@@ -21,6 +21,7 @@ const Sidebar = () => {
 
 export default Sidebar;
 
+// CSS
 const SidebarContainer = styled.div`
   border-right: 1px solid #1b1c1d;
   padding-right: 50px;

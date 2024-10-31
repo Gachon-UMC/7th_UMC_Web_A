@@ -6,6 +6,7 @@ const SearchPage = () => {
 
 export default SearchPage;
 
+// CSS
 const Search = styled.h1`
   background-color: black;
   color: white;

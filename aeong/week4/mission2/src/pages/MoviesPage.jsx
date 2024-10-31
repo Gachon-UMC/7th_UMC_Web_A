@@ -40,6 +40,7 @@ const MoviesPage = () => {
 
 export default MoviesPage;
 
+// CSS
 const Movies = styled.h1`
   background-color: black;
   color: white;

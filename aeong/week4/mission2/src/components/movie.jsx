@@ -23,10 +23,15 @@ const Movie = ({ movie }) => {
 
 export default Movie;
 
+// CSS
 const MovieContainer = styled.div`
   margin: 10px;
   text-align: center;
   width: 200px;
+  transition: all 0.2s ease;
+  &:hover {
+    filter: brightness(50%);
+  }
 `;
 
 const Poster = styled.img`

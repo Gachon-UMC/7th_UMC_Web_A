@@ -18,6 +18,7 @@ const Navbar = () => {
 
 export default Navbar;
 
+// CSS
 const NavBar = styled.nav`
   display: flex;
   justify-content: space-between;

@@ -2,19 +2,19 @@ import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePage from "./pages/home.jsx";
-import NotFound from "./pages/not-found.jsx";
-import MoviesPage from "./pages/movies.jsx";
-import LoginPage from "./pages/login.jsx";
-import SignupPage from "./pages/signup.jsx";
-import SearchPage from "./pages/search.jsx";
-import NowPlayingPage from "./pages/now-playing.jsx";
-import PopularPage from "./pages/popular.jsx";
-import TopRatedPage from "./pages/top-rated.jsx";
-import UpComingPage from "./pages/up-coming.jsx";
-import MovieDetailsPage from "./pages/MoviesDetails.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import MoviesPage from "./pages/MoviesPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
+import NowPlayingPage from "./pages/NowPlayingPage.jsx";
+import PopularPage from "./pages/PopularPage.jsx";
+import TopRatedPage from "./pages/TopRatedPage.jsx";
+import UpComingPage from "./pages/UpComingPage.jsx";
+import MovieDetailsPage from "./pages/MovieDetailsPage.jsx";
 
-import RootLayout from "./layout/root-layout.jsx";
+import RootLayout from "./layout/RootLayout.jsx";
 
 const router = createBrowserRouter([
   {

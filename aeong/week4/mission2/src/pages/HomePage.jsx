@@ -7,6 +7,7 @@ const HomePage = () => {
 
 export default HomePage;
 
+// CSS
 const Home = styled.h1`
   color: white;
   margin-left: 10px;

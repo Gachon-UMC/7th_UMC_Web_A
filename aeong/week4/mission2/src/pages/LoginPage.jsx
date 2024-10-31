@@ -6,6 +6,7 @@ const LoginPage = () => {
 
 export default LoginPage;
 
+// CSS
 const Login = styled.h1`
   background-color: black;
   color: white;

@@ -9,7 +9,9 @@ const RootLayout = () => {
       <Navbar />
       <Container>
         <Sidebar />
-        <Outlet />
+        <OutletContainer>
+          <Outlet />
+        </OutletContainer>
       </Container>
     </>
   );
@@ -17,7 +19,13 @@ const RootLayout = () => {
 
 export default RootLayout;
 
+// CSS
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  height: 54em;
+`;
+
+const OutletContainer = styled.div`
+  overflow-y: auto; /* Content 영역 내부만 스크롤 가능 */
 `;

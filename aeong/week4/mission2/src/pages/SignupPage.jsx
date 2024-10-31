@@ -6,6 +6,7 @@ const SignupPage = () => {
 
 export default SignupPage;
 
+// CSS
 const Signup = styled.h1`
   background-color: black;
   color: white;

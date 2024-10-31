@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import Movie from "../components/movie";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import useCustomFetch from "../hooks/useCustomFetch";
 
 const UpComingPage = () => {
@@ -38,6 +36,7 @@ const UpComingPage = () => {
 
 export default UpComingPage;
 
+// CSS
 const UpComingContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

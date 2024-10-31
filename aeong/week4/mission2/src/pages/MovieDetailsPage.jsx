@@ -64,6 +64,7 @@ const MovieDetailsPage = () => {
 
 export default MovieDetailsPage;
 
+// CSS
 const Details = styled.div`
   color: white;
   margin-left: 10px;
