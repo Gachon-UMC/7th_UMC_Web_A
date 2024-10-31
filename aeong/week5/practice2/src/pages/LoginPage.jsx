@@ -85,13 +85,8 @@ const ErrorText = styled.h1`
 
 const LoginButton = styled.button`
   margin: 0.5rem;
-  color: white;
-  background-color: ${(props) => (props.disabled ? "gray" : "#f82f62")};
   text-decoration: none;
   border-radius: 0.5rem;
   width: 22rem;
   height: 3rem;
-  &:hover {
-    background-color: #f6407a;
-  }
 `;

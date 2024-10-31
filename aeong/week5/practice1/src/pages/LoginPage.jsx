@@ -84,7 +84,4 @@ const LoginButton = styled.button`
   border-radius: 0.5rem;
   width: 20.5rem;
   height: 2.5rem;
-  &:hover {
-    background-color: #f6407a;
-  }
 `;
