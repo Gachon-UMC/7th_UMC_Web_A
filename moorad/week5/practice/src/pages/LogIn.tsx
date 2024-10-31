@@ -6,10 +6,7 @@ import useForm from "../hooks/useForm";
 import styled from "styled-components";
 import validateLogin from "../utils/validate";
 
-// interface Inputs {
-//     [key: string]: string;
-// }
-
+// useForm 훅 이용 버전
 const LogIn = () => {
     const login = useForm({
         initialValues: {
@@ -19,28 +16,6 @@ const LogIn = () => {
         validate: validateLogin,
     });
 
-    console.log(login);
-    // const schema = z
-    //     .object({
-    //         email: z.coerce
-    //             .string()
-    //             .email({ message: "올바른 이메일 형식이 아닙니다." }),
-    //         password: z.coerce
-    //             .string()
-    //             .min(8, { message: "비밀번호는 8자리 이상이어야 합니다." })
-    //             .max(16, { message: "비밀번호는 16자리 이하여야 합니다." }),
-    //     })
-    //     .required();
-    // // 이 코드의 문제점은 제출하기 버튼을 누른 이후부터 유효성 검사를 진행한다는 것
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    // } = useForm<Inputs>({ resolver: zodResolver(schema), mode: "onChange" });
-    // // onBlur , onChange
-    // // mode 설정을 통해서 시기 결정 가능
-
-    // 문제점 : 아이디만 먼저 입력했을 때 button disabled가 풀려버림 (비밀번호 입력 안했을 때 : focus X)
     const onSubmit = (data) => {
         console.log(data);
     };
@@ -64,35 +39,8 @@ const LogIn = () => {
                 {login.touched.password && login.errors.password && (
                     <span>{login.errors.password}</span>
                 )}
-                {/* <div>
-                    <Input
-                        type={"text"}
-                        placeholder="아이디를 입력하세요."
-                        {...register("email", { required: true })}
-                    ></Input>
-                    {errors.email && (
-                        <ErrorMessage>{errors.email.message}</ErrorMessage>
-                    )}
-                </div>
 
-                <div>
-                    <Input
-                        type={"password"}
-                        placeholder="비밀번호를 입력하세요."
-                        autoComplete="off"
-                        {...register("password", { required: true })}
-                    ></Input>
-                    {errors.password && (
-                        <ErrorMessage>{errors.password.message}</ErrorMessage>
-                    )}
-                </div>
-                */}
-                <LoginBtn
-                    type="submit"
-                    // disabled={Object.keys(errors).length === 0 ? false : true}
-                >
-                    로그인
-                </LoginBtn>
+                <LoginBtn type="submit">로그인</LoginBtn>
             </form>
         </LogInContainer>
     );

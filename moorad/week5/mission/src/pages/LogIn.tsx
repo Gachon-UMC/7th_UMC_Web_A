@@ -1,35 +1,23 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { schema } from "../schemas/loginSchema";
 import styled from "styled-components";
 
-interface Inputs {
-    [key: string]: string;
-}
+type loginType = z.infer<typeof schema>;
 
 const LogIn = () => {
-    const schema = z
-        .object({
-            email: z.coerce
-                .string()
-                .email({ message: "올바른 이메일 형식이 아닙니다." }),
-            password: z.coerce
-                .string()
-                .min(8, { message: "비밀번호는 8자리 이상이어야 합니다." })
-                .max(16, { message: "비밀번호는 16자리 이하여야 합니다." }),
-        })
-        .required();
     // 이 코드의 문제점은 제출하기 버튼을 누른 이후부터 유효성 검사를 진행한다는 것
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<Inputs>({ resolver: zodResolver(schema), mode: "onChange" });
+    } = useForm<loginType>({ resolver: zodResolver(schema), mode: "onChange" });
     // onBlur , onChange
     // mode 설정을 통해서 시기 결정 가능
-
     // 문제점 : 아이디만 먼저 입력했을 때 button disabled가 풀려버림 (비밀번호 입력 안했을 때 : focus X)
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+
+    const onSubmit: SubmitHandler<loginType> = (data) => {
         console.log(data);
     };
 
