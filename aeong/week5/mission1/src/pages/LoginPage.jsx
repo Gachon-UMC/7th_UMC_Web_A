@@ -67,9 +67,12 @@ export default LoginPage;
 
 // CSS
 const Container = styled.div`
+  width: 85vw;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid red;
 `;
 
 const Login = styled.h2`
