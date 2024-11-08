@@ -39,8 +39,15 @@ const LogInPage = () => {
     // isValid : 현재 폼 값이 모든 유효성 검사 규칙을 통과했는지 여부를 나타낸다
     // errors : 현재 폼의 각 필드에서 반환된 유효성 검사 오류 메시지가 저장된다.
     // console.log(errors);
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    // props로 data 라는 객체를 받는데 이때 data
+    // handleSubmit 함수: handleSubmit은 폼의 유효성을 검사한 후, 모든 필드 값이 유효하면 onsubmit 함수가 호출되도록 합니다. 이때 폼의 데이터가 data라는 객체로 onsubmit 함수에 전달
     const onsubmit = async (data) => {
+        console.log(data);
+
+        // post 메서드로 인증 요청
         try {
             const response = await axiosInstance2.post("/auth/login", {
                 email: data.email,
@@ -55,6 +62,7 @@ const LogInPage = () => {
             // API 요청이 성공하면 할 일 (예: 사용자에게 메시지 표시, 페이지 이동)
             // navigate("/");
             alert("로그인 성공!");
+            navigate("/");
             setIsLoggedIn(true);
         } catch (error) {
             // 에러가 발생했을 때 처리
@@ -66,7 +74,6 @@ const LogInPage = () => {
         }
     };
 
-    const navigate = useNavigate();
     // email 과 password 상태 변화를 실시간 감지
     const emailValue = watch("email");
     const passwordValue = watch("password");
@@ -83,7 +90,7 @@ const LogInPage = () => {
     // 여기서 문제가 있는데 form 태그에서 type을 onsubmit 으로 해서 하면
 
     //handleSubmit(onSubmit)은 폼 제출 시 onSubmit 함수를 호출하며, 이때 폼의 모든 입력 데이터가 유효할 경우에만 onSubmit이 실행
-    // <form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시
+    // <form> 태그의 noValidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시
     return (
         <DivStyle>
             {!isLoggedIn ? (
