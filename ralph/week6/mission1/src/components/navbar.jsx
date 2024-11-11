@@ -8,36 +8,6 @@ const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const navigate = useNavigate();
-
-    //     useEffect(() => {
-    //         // localStorage에 AccessToken이 있는지 확인하여 로그인 상태 설정
-    //         const token = localStorage.getItem("accessToken");
-    //         if (token) {
-    //             setIsLoggedIn(true);
-    //             const fetchUserInfo = async () => {
-    //                 try {
-    //                     const response = await axiosInstance2.get("/user/me", {
-    //                         headers: {
-    //                             Authorization: `Bearer ${token}`,
-    //                         },
-    //                     });
-    //                     setUserInfo(response.data);
-    //                 } catch (error) {
-    //                     console.error("유저 정보를 불러오는 데 실패했습니다:", error);
-    //                 }
-    //             };
-    //         }
-    //         setUserInfo(response.data);
-    //     } catch (error) {
-    //         console.error("유저 정보를 불러오는 데 실패했습니다:", error);
-    //     }
-    // };
-
-    // fetchUserInfo();
-    // } else {
-    // setIsLoggedIn(false);
-    // }
-    // }, [isLoggedIn]);
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
 
@@ -52,6 +22,9 @@ const Navbar = () => {
                             Authorization: `Bearer ${token}`,
                         },
                     });
+                    // response 값을 console에 찍어보면 data라는 키값 안에 우리가 원하는 유저정보가 들어 있는 객체가 있다.
+                    console.log(response);
+
                     setUserInfo(response.data);
                 } catch (error) {
                     console.error(
