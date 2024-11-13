@@ -1,13 +1,8 @@
 import { useQuery } from "react-query";
 import Movies from "../components/movies";
 import styled from "styled-components";
-import { axiosInstance } from "../apis/axios-instance";
 import Movielistskeleton from "../components/Movie/Movielistskeleton";
-import UseGetMovies from "../components/useGetMovies";
-import useGetInfiniteMovies from "../components/useGetInfiniteMovies";
-import { useInView } from "react-intersection-observer";
-import Spinner from "../components/Spinner";
-import { useEffect } from "react";
+import useGetMovies from "../components/useGetMovies";
 // const QueryToprated = async () => {
 //     const getdata = await axiosInstance.get(
 //         `/movie/top_rated?language=ko&page=1&region=KR`
@@ -16,15 +11,16 @@ import { useEffect } from "react";
 // };
 
 const Toprated = () => {
-    const { data, isError, isLoading, hasNextPage, isFetching, fetchNextPage } =
-        useGetInfiniteMovies("top_rated");
-
-    const { ref, inView } = useInView({ threshold: 0 });
-    useEffect(() => {
-        if (inView) {
-            !isFetching && hasNextPage && fetchNextPage();
-        }
-    }, [inView, isFetching, hasNextPage, fetchNextPage]);
+    const {
+        data: movies,
+        isLoading,
+        isError,
+    } = useQuery({
+        queryKey: ["top_rated"],
+        queryFn: () => useGetMovies({ category: "top_rated", pageParam: 1 }),
+        cacheTime: 10000,
+        staleTime: 10000,
+    });
 
     if (isLoading) {
         return <Movielistskeleton number={20} />;
@@ -32,21 +28,14 @@ const Toprated = () => {
     if (isError) {
         return <div style={{ color: "white" }}>에러를</div>;
     }
-
     return (
         <TopratedDiv>
-            {data?.pages.map((page) => {
-                return page.map((movie) => {
-                    return <Movies key={movie.id} movie={movie} />;
-                });
+            {movies?.map((movie) => {
+                return <Movies key={movie.id} movie={movie} />;
             })}
-            <div ref={ref} style={{ marginTop: "50px" }}>
-                <Spinner />
-            </div>
         </TopratedDiv>
     );
 };
-
 export default Toprated;
 
 //css
