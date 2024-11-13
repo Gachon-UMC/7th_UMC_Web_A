@@ -10,6 +10,7 @@ import Spinner from "../components/Spinner";
 import { useEffect, useState } from "react";
 import useGetMovies from "../components/useGetMovies";
 import useMoveButton from "../hooks/useMoveButton";
+
 // const QueryToprated = async () => {
 //     const getdata = await axiosInstance.get(
 //         `/movie/top_rated?language=ko&page=1&region=KR`
@@ -42,18 +43,21 @@ const Toprated = () => {
 
     return (
         <TopratedDiv>
-            {movies?.map((movie) => {
-                return <Movies key={movie.id} movie={movie} />;
-            })}
-            <div style={{ display: "flex", marginTop: "20px" }}>
+            <Moviediv>
+                {movies?.map((movie) => {
+                    return <Movies key={movie.id} movie={movie} />;
+                })}
+            </Moviediv>
+
+            <Buttondiv>
                 <button onClick={reverseButton} disabled={page === 1}>
                     이전
                 </button>
-                <div>{page}페이지</div>
+                <Pagediv>{page}페이지</Pagediv>
                 <button onClick={nextButton} disabled={!movies || !hasMore}>
                     다음
                 </button>
-            </div>
+            </Buttondiv>
         </TopratedDiv>
     );
 };
@@ -67,4 +71,20 @@ const TopratedDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+`;
+const Moviediv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    margin-left: 20px;
+`;
+
+const Buttondiv = styled.div`
+    display: flex;
+    flexdirection: row;
+`;
+const Pagediv = styled.div`
+    align-content: center;
+    margin: 5px;
 `;

@@ -44,25 +44,21 @@ const Nowplaying = () => {
 
     return (
         <NowplayingDiv>
-            {movies?.map((movie) => (
-                <Movies key={movie.id} movie={movie} />
-            ))}
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
-                    alignItems: "flex-end",
-                }}
-            >
+            <Moviediv>
+                {movies?.map((movie) => (
+                    <Movies key={movie.id} movie={movie} />
+                ))}
+            </Moviediv>
+
+            <Buttondiv>
                 <button onClick={reverseButton} disabled={page === 1}>
                     이전
                 </button>
-                <div>{page}페이지</div>
+                <Pagediv>{page}페이지</Pagediv>
                 <button onClick={nextButton} disabled={!movies || !hasMore}>
                     다음
                 </button>
-            </div>
+            </Buttondiv>
         </NowplayingDiv>
     );
 };
@@ -76,4 +72,27 @@ const NowplayingDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    height: 100%;
+`;
+const Moviediv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    margin-left: 20px;
+    height: 90%;
+`;
+
+const Buttondiv = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 5px;
+    width: 20vw;
+    height: 3vh;
+`;
+
+const Pagediv = styled.div`
+    align-content: center;
+    margin: 5px;
 `;
