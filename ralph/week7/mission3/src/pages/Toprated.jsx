@@ -7,7 +7,9 @@ import UseGetMovies from "../components/useGetMovies";
 import useGetInfiniteMovies from "../components/useGetInfiniteMovies";
 import { useInView } from "react-intersection-observer";
 import Spinner from "../components/Spinner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useGetMovies from "../components/useGetMovies";
+import useMoveButton from "../hooks/useMoveButton";
 // const QueryToprated = async () => {
 //     const getdata = await axiosInstance.get(
 //         `/movie/top_rated?language=ko&page=1&region=KR`
@@ -16,32 +18,41 @@ import { useEffect } from "react";
 // };
 
 const Toprated = () => {
-    const { data, isError, isLoading, hasNextPage, isFetching, fetchNextPage } =
-        useGetInfiniteMovies("top_rated");
+    const [hasMore, setHasMore] = useState(true);
+    const initialData = 20;
+    // custom hook 으로 만들어서 외부에서 가져옴
+    const { reverseButton, nextButton, page } = useMoveButton();
 
-    const { ref, inView } = useInView({ threshold: 0 });
+    const {
+        data: movies,
+        isError,
+        isPreviousData,
+    } = useQuery({
+        queryKey: ["category", page],
+        queryFn: () => useGetMovies({ category: "top_rated", pageParam: page }),
+        keepPreviousData: true,
+    });
+
     useEffect(() => {
-        if (inView) {
-            !isFetching && hasNextPage && fetchNextPage();
-        }
-    }, [inView, isFetching, hasNextPage, fetchNextPage]);
+        if (movies?.length < initialData) return setHasMore(false);
+        else setHasMore(true);
+    }, [movies]);
 
-    if (isLoading) {
-        return <Movielistskeleton number={20} />;
-    }
-    if (isError) {
-        return <div style={{ color: "white" }}>에러를</div>;
-    }
+    console.log(page);
 
     return (
         <TopratedDiv>
-            {data?.pages.map((page) => {
-                return page.map((movie) => {
-                    return <Movies key={movie.id} movie={movie} />;
-                });
+            {movies?.map((movie) => {
+                return <Movies key={movie.id} movie={movie} />;
             })}
-            <div ref={ref} style={{ marginTop: "50px" }}>
-                <Spinner />
+            <div style={{ display: "flex", marginTop: "20px" }}>
+                <button onClick={reverseButton} disabled={page === 1}>
+                    이전
+                </button>
+                <div>{page}페이지</div>
+                <button onClick={nextButton} disabled={!movies || !hasMore}>
+                    다음
+                </button>
             </div>
         </TopratedDiv>
     );
