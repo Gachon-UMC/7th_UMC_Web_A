@@ -35,9 +35,8 @@ export default function Movies({ movie }) {
 
 //css
 const MovieContainer = styled.div`
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    margin-top: 10px;
+    display: flex;
     gap: 20px;
 `;
 
@@ -48,31 +47,35 @@ const Container = styled.div`
 `;
 
 const Moviemain = styled.div`
-    width: 140px;
+    width: 100%;
+    height:100%
     height: 210px;
-    border-radius: 10px;
-    overflow: hidden;
+    border-radius: 20px;
 `;
 
 const Textrapper = styled.div`
-    width: 140px;
+    width: 100%;
     height: 30px;
     display: flex;
     flex-direction: column;
     gap: 2px;
     margin-top: 5px;
+    align-items: center;
 `;
 
 const TitleBox = styled.div`
-    background-color: gray;
     border-radius: 10px;
     width: 140px;
     height: 100%;
+    color: white;
+    align-items: center;
 `;
 
 const DescriptionBox = styled.div`
-    background-color: gray;
     border-radius: 10px;
     width: 140px;
     height: 100%;
+    color: white;
+    margin-top: 3px;
+    align-items: center;
 `;
