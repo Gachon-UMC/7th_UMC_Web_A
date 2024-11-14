@@ -64,7 +64,7 @@ const Nowplaying = () => {
     if (isError) {
         return <div style={{ color: "white" }}>에러를</div>;
     }
-    console.log(movies?.pages);
+    console.log(movies);
 
     return (
         <NowplayingDiv>
