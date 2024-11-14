@@ -8,6 +8,10 @@ import QueryUserInfo from "./QueryUserInfo";
 const Navbar = () => {
     const [token, setToken] = useState(localStorage.getItem("accessToken"));
     const navigate = useNavigate();
+    useEffect(() => {
+        const gettoken = localStorage.getItem("accessToken");
+        setToken(gettoken);
+    }, [localStorage.getItem("accessToken")]);
 
     const { data, isError } = useQuery(
         ["UserInfo", token],
@@ -16,11 +20,6 @@ const Navbar = () => {
             enabled: !!token,
         }
     );
-
-    useEffect(() => {
-        const gettoken = localStorage.getItem("accessToken");
-        setToken(gettoken);
-    }, [localStorage.getItem("accessToken")]);
 
     const handleLogout = () => {
         // 로그아웃 시 localStorage에서 토큰 삭제 및 상태 업데이트

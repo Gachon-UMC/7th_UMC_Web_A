@@ -37,12 +37,22 @@ const SearchMovieList = ({ searchValue }) => {
         );
     }
     return (
-        <div>
+        <MovieWrapper>
             {movies?.map((movie) => (
                 <Movies key={movie.id} movie={movie} />
             ))}
-        </div>
+        </MovieWrapper>
     );
 };
 
 export default SearchMovieList;
+
+//css
+const MovieWrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    gap: 1.25em;
+    padding: 1.25em;
+    justify-content: center;
+    align-items: start;
+`;

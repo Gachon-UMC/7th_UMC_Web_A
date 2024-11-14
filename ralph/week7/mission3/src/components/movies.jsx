@@ -18,7 +18,10 @@ export default function Movies({ movie }) {
         <MovieContainer>
             <Container className="movie-container" onClick={onClickMovieitem}>
                 <Moviemain className="a">
-                    <img src={`${IMG_BASE_URL}${movie.poster_path}`}></img>
+                    <img
+                        src={`${IMG_BASE_URL}${movie.poster_path}`}
+                        alt="이미자가 없습니다."
+                    ></img>
                 </Moviemain>
 
                 <Textrapper className="movie-info">

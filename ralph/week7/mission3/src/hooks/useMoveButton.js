@@ -10,7 +10,7 @@ const useMoveButton = () => {
         return setPage(page + 1);
     };
 
-    return { reverseButton, nextButton, page, setPage };
+    return { reverseButton, nextButton, page };
 };
 
 export default useMoveButton;

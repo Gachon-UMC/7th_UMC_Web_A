@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import useCustomfetch from "../hooks/useCustomfetch";
-import Movies from "../components/movies";
 import SearchMovieList from "../components/Movie/search-movie-list";
+
 const search = () => {
     const [searchValue, setSearchValue] = useState("");
     const navigate = useNavigate();

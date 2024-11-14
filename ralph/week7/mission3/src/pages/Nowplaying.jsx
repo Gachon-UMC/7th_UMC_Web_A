@@ -35,7 +35,7 @@ const Nowplaying = () => {
         staleTime: 10000,
         keepPreviousData: true,
     });
-    console.log(movies?.length);
+    console.log(movies);
 
     useEffect(() => {
         if (movies?.length < initialData) return setHasMore(false);
