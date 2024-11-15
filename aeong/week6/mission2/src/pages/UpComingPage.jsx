@@ -27,7 +27,7 @@ const UpComingPage = () => {
 
   return (
     <UpComingContainer>
-      {movies.data?.results.map((movie) => (
+      {movies?.results?.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
     </UpComingContainer>

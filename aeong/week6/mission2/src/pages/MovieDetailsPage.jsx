@@ -35,20 +35,20 @@ const MovieDetailsPage = () => {
     <Details>
       <MovieDetailsContainer>
         <MovieDetailsText>
-          <h1>{movieDetails.data?.title}</h1>
-          <h3>평균 {movieDetails.data?.vote_average}</h3>
-          <h3>{movieDetails.data?.release_date}</h3>
-          <h3>{movieDetails.data?.runtime}분</h3>
-          <p>{movieDetails.data?.overview}분</p>
+          <h1>{movieDetails?.title}</h1>
+          <h3>평균 {movieDetails?.vote_average}</h3>
+          <h3>{movieDetails?.release_date}</h3>
+          <h3>{movieDetails?.runtime}분</h3>
+          <p>{movieDetails?.overview}분</p>
         </MovieDetailsText>
         <MovieImage
-          src={`https://image.tmdb.org/t/p/original/${movieDetails.data?.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original/${movieDetails?.backdrop_path}`}
         />
       </MovieDetailsContainer>
 
       <h1>출연</h1>
       <CastList>
-        {credits.data?.cast?.map((castMember) => (
+        {credits?.cast?.map((castMember) => (
           <Cast key={castMember.id}>
             <CastImage
               src={`https://image.tmdb.org/t/p/original/${castMember.profile_path}`}

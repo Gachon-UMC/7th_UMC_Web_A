@@ -27,7 +27,7 @@ const NowPlayingPage = () => {
 
   return (
     <NowPlayingContainer>
-      {movies.data?.results.map((movie) => (
+      {movies?.results?.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
     </NowPlayingContainer>

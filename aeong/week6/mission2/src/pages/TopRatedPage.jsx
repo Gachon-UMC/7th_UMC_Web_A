@@ -27,7 +27,7 @@ const TopRatedPage = () => {
 
   return (
     <TopRatedContainer>
-      {movies.data?.results.map((movie) => (
+      {movies?.results?.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
     </TopRatedContainer>
