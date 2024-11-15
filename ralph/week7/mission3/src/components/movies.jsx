@@ -20,7 +20,7 @@ export default function Movies({ movie }) {
                 <Moviemain className="a">
                     <img
                         src={`${IMG_BASE_URL}${movie.poster_path}`}
-                        alt="이미자가 없습니다."
+                        alt="이미지가 없습니다."
                     ></img>
                 </Moviemain>
 

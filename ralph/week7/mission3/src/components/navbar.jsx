@@ -13,13 +13,11 @@ const Navbar = () => {
         setToken(gettoken);
     }, [localStorage.getItem("accessToken")]);
 
-    const { data, isError } = useQuery(
-        ["UserInfo", token],
-        () => QueryUserInfo(token),
-        {
-            enabled: !!token,
-        }
-    );
+    const { data, isError } = useQuery({
+        queryKey: ["UserInfo", token],
+        queryFn: () => QueryUserInfo(token),
+        enabled: !!token,
+    });
 
     const handleLogout = () => {
         // 로그아웃 시 localStorage에서 토큰 삭제 및 상태 업데이트
