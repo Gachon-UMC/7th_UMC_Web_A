@@ -9,13 +9,11 @@ const Navbar = () => {
     const [token, setToken] = useState(localStorage.getItem("accessToken"));
     const navigate = useNavigate();
 
-    const { data, isError } = useQuery(
-        ["UserInfo", token],
-        () => QueryUserInfo(token),
-        {
-            enabled: !!token,
-        }
-    );
+    const { data, isError } = useQuery({
+        queryKey: ["UserInfo", token],
+        queryFn: () => QueryUserInfo(token),
+        enabled: !!token,
+    });
 
     useEffect(() => {
         const gettoken = localStorage.getItem("accessToken");
