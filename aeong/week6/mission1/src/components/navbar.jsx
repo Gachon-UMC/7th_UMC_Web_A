@@ -10,10 +10,9 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("accessToken");
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem("accessToken");
-
       if (token) {
         try {
           const response = await axios.get("http://localhost:3000/user/me", {
@@ -27,11 +26,12 @@ const Navbar = () => {
             "유저 정보 불러오기 실패:",
             error.response?.data || error.message
           );
+          alert("로그인 정보를 불러올 수 없습니다. 다시 시도해 주세요.");
         }
       }
     };
     fetchUser();
-  }, []);
+  }, [token]);
 
   const handleLogout = () => {
     // 로컬스토리지에 토큰 삭제
