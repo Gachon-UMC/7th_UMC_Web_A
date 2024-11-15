@@ -8,6 +8,7 @@ export default function Movies({ movie }) {
     const onClickMovieitem = () => {
         navigate(`/movies/${movie.id}`, { state: movie });
     };
+
     // {state:movie} 를 통해 `/movies/${movie.id}`이 경로로 이동하면서 정보도 같이 보낼 수 있게 만든다
     // 이렇게 이동하면서 정보도 같이 보내려면 nagivate 로 이동할 때 같이 보내야한다. 안그러면 다른 방법 써야함
     // 이 정보를 MovieDetails 컴포넌트에서

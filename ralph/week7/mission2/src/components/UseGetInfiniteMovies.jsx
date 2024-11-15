@@ -1,5 +1,4 @@
 import React from "react";
-import { axiosInstance } from "../apis/axios-instance";
 import { useInfiniteQuery } from "react-query";
 import UseGetMovies from "./useGetMovies";
 
