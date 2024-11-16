@@ -1,25 +1,31 @@
 import styled from "styled-components";
 import Movie from "../components/movie";
-
-import useGetMovies from "../hooks/queries/useGetMovies";
-import { useQuery } from "@tanstack/react-query";
-
 import CardSkeleton from "../components/card-skeleton";
+import useGetInfiniteMovies from "../hooks/queries/useGetInfiniteMovies";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const TopRatedPage = () => {
   const {
     data: movies,
     isPending,
+    isFetching,
     isError,
-  } = useQuery({
-    queryFn: () => useGetMovies({ category: "top_rated", pageParam: 1 }),
-    queryKey: ["movies", "top_rated"],
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetInfiniteMovies("top_rated");
 
-    //10초 동안 fresh한 상태
-    cacheTime: 10000,
-    //10초 동안 stale한 상태
-    staleTime: 10000,
+  const { ref, inView } = useInView({
+    threshold: 0,
   });
+
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage();
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage]);
 
   if (isPending) {
     return <CardSkeleton />;
@@ -35,9 +41,13 @@ const TopRatedPage = () => {
 
   return (
     <TopRatedContainer>
-      {movies?.results?.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
-      ))}
+      {movies?.pages
+        ?.map((page) => page.results)
+        ?.flat()
+        ?.map((movie, _) => (
+          <Movie movie={movie} key={movie.id} />
+        ))}
+      <div ref={ref}>{isFetching && <ClipLoader color={"#fff"} />}</div>
     </TopRatedContainer>
   );
 };

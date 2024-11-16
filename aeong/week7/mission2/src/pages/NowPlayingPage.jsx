@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import Movie from "../components/movie";
-import useGetMovies from "../hooks/queries/useGetMovies";
-import { useQuery } from "@tanstack/react-query";
 import CardSkeleton from "../components/card-skeleton";
 import useGetInfiniteMovies from "../hooks/queries/useGetInfiniteMovies";
 import { useInView } from "react-intersection-observer";
