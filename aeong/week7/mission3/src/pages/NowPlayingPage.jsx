@@ -13,7 +13,7 @@ const NowPlayingPage = () => {
 
   const {
     data: movies,
-    isLoading,
+    isPending,
     isError,
     isFetching,
     isPreviousData,
@@ -25,7 +25,7 @@ const NowPlayingPage = () => {
     cacheTime: 10000,
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <CardSkeleton />;
   }
 
@@ -90,7 +90,7 @@ const Pagination = styled.div`
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #333;
+    background-color: #f82f62;
     color: white;
 
     &:disabled {
