@@ -60,7 +60,7 @@ const MoviesPage = () => {
       })}
 
       {/* 스켈레톤 UI와 스피너 표시 */}
-      {(isFetchingNextPage || showFetchingSkeleton) && (
+      {isFetchingNextPage && (
         <StyledSkeleton>
           <CardListSkeleton number={10} />
           <SpinnerContainer>
