@@ -7,17 +7,24 @@ import CardListSkeleton from "../components/card-list-skeleton";
 
 const FetchMovies = async(page) => {
   const response = await axiosInstance.get(`/movie/now_playing?language=ko-KR&page=${page}`);
-  return response.data.results;
+  // console.log(response.data); // 데이터 구조 확인
+  return {
+    movies: response.data.results,
+    totalPages: response.data.total_pages, // total_pages 반환
+  };
 };
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
-  const { data: movies, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: () => FetchMovies(page),
     queryKey: ['now_playing', page],
   });
 
-  const handleNextPage = () => setPage((prev) => prev + 1);
+  const movies = data?.movies || [];
+  const totalPages = data?.totalPages || 1;
+
+  const handleNextPage = () => { if (page < totalPages) setPage((prev) => prev + 1); };
   const handlePrevPage = () => { if (page > 1) setPage((prev) => prev - 1); };
 
   if (isLoading) {
@@ -43,7 +50,7 @@ const HomePage = () => {
       <PaginationContainer>
         <PaginationButton onClick={handlePrevPage} disabled={page === 1}>이전</PaginationButton>
         <PageNumber>{page} 페이지</PageNumber>
-        <PaginationButton onClick={handleNextPage}>다음</PaginationButton>
+        <PaginationButton onClick={handleNextPage} disabled={page === totalPages}>다음</PaginationButton>
       </PaginationContainer>
     </StyledHomePage>
   );
@@ -54,6 +61,7 @@ export default HomePage;
 // CSS
 const StyledHomePage = styled.div`
   color: white;
+  margin-top: 1rem;
 `;
 
 const CardsContainer = styled.div`
