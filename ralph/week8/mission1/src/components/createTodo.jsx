@@ -34,8 +34,3 @@
 // };
 
 // export default CreateTodo;
-const handleSubmit = async (e) => {
-    // e.preventDefault();
-    await createTodo({ title, content, checked });
-};
-export { handleSubmit };

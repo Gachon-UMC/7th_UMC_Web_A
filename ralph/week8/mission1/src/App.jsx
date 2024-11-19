@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Todo from "./components/toDos";
 import Errorpage from "./components/errorpage";
 import GetTodoDetails from "./components/getTodoDetails";
