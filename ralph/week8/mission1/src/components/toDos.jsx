@@ -9,7 +9,7 @@ import {
 } from "./todoApi";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-
+// import DeleteTodo from "./deleteTodo";
 const Todo = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -18,7 +18,7 @@ const Todo = () => {
     const [editingId, setEditingId] = useState();
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
-
+    // const { deleteData, todolist } = DeleteTodo();
     const handleSubmit = async (e) => {
         // e.preventDefault();
         await createTodo({ title, content, checked });
@@ -57,7 +57,7 @@ const Todo = () => {
         }
     };
 
-    // 삭제하기
+    // 삭제하기;
     const deleteData = async (id) => {
         try {
             await deleteTodo({ id }); // 특정 Todo 삭제
@@ -93,44 +93,54 @@ const Todo = () => {
                 <button type="submit">todo생성</button>
             </form>
             {todoList.map((data) => (
-                <div key={data.id} onClick={() => navigate(`/${data.id}`)}>
-                    {editingId === data.id ? (
-                        <div>
-                            <input
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            ></input>
-                            <input
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
-                            ></input>
-                        </div>
-                    ) : (
-                        <div>
-                            <div>{data.title}</div>
-                            <div>{data.content}</div>
-                            <input type="checkbox"></input>
-                        </div>
-                    )}
-                    {editingId === data.id ? (
-                        <button
-                            onClick={() => patchData(data.id, title, content)}
-                        >
-                            저장
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() =>
-                                patchDatam(data.id, data.title, data.content)
-                            }
-                        >
-                            수정
-                        </button>
-                    )}
+                <div key={data.id}>
+                    <div onClick={() => navigate(`/${data.id}`)}>
+                        {editingId === data.id ? (
+                            <div>
+                                <input
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                ></input>
+                                <input
+                                    value={content}
+                                    onChange={(e) => setContent(e.target.value)}
+                                ></input>
+                            </div>
+                        ) : (
+                            <div>
+                                <div>{data.title}</div>
+                                <div>{data.content}</div>
+                                <input type="checkbox"></input>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        {editingId === data.id ? (
+                            <button
+                                onClick={() =>
+                                    patchData(data.id, title, content)
+                                }
+                            >
+                                저장
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() =>
+                                    patchDatam(
+                                        data.id,
+                                        data.title,
+                                        data.content
+                                    )
+                                }
+                            >
+                                수정
+                            </button>
+                        )}
 
-                    <button onClick={() => deleteData(data.id)}>
-                        삭제하기
-                    </button>
+                        <button onClick={() => deleteData(data.id)}>
+                            삭제하기
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>
