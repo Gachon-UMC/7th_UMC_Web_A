@@ -16,6 +16,7 @@ const Todo = () => {
     const [checked, setCheked] = useState(false);
     const [todoList, setTodoList] = useState([]);
     const [editingId, setEditingId] = useState();
+    const [search, setSearch] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -25,12 +26,13 @@ const Todo = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const data = await getTodoList();
+            const data = await getTodoList({ title: search });
             setTodoList(data[0]);
+            console.log(data);
         }; // Promise 해결
 
         getData();
-    }, []);
+    }, [search]);
 
     // 수정하기
     const patchDatam = (id, title, content) => {
@@ -69,17 +71,24 @@ const Todo = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <input
-                    placeholder="제목을 입력해주세요"
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                ></input>
-                <input
-                    placeholder="내용을 입력해주세요"
-                    onChange={(e) => {
-                        setContent(e.target.value);
-                    }}
-                ></input>
+                    value={search}
+                    placeholder="검색어를 입력하세요"
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <div>
+                    <input
+                        placeholder="제목을 입력해주세요"
+                        onChange={(e) => {
+                            setTitle(e.target.value);
+                        }}
+                    ></input>
+                    <input
+                        placeholder="내용을 입력해주세요"
+                        onChange={(e) => {
+                            setContent(e.target.value);
+                        }}
+                    ></input>
+                </div>
 
                 <button type="submit">todo생성</button>
             </form>

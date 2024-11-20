@@ -14,8 +14,12 @@ const createTodo = async ({ title, content, checked = false }) => {
     return data;
 };
 // Todo List 가져오기
-const getTodoList = async () => {
-    const { data } = await axiosInstance2.get("/todo");
+const getTodoList = async ({ title }) => {
+    let url = "/todo";
+    if (title) {
+        url += `?title=${title}`;
+    }
+    const { data } = await axiosInstance2.get(url);
     return data;
 };
 
