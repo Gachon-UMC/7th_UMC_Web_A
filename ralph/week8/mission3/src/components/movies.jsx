@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import "./movie.css"
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 import styled from "styled-components";
 export default function Movies({ movie }) {

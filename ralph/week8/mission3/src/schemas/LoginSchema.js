@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import React from "react";
-
+// 로그인 스키마 분리
 export const LoginSchema = yup.object().shape({
     email: yup
         .string()

@@ -1,4 +1,5 @@
 import * as yup from "yup";
+// 회원가입 스키마 분리
 export const SignUpSchema = yup.object().shape({
     email: yup
         .string()

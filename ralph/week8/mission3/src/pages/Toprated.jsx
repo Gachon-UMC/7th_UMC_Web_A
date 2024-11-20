@@ -13,11 +13,11 @@ import MovieDataContext from "../context/MovieDataContext";
 // });
 
 const Toprated = () => {
+    // context-api 사용해서 전역변수로 부터 불러옴
     const { data, isError, isLoading, reverseButton, nextButton, page } =
         useContext(MovieDataContext);
     const [hasMore, setHasMore] = useState(true);
     const initialData = 20;
-    // custom hook 으로 만들어서 외부에서 가져옴
 
     useEffect(() => {
         if (data?.length < initialData) return setHasMore(false);
