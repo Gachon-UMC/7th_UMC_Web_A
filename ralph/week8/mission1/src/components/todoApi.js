@@ -30,15 +30,16 @@ const getTodoDetail = async ({ id }) => {
 
     return data;
 };
+
 // Todo 수정하기
 const patchTodo = async ({ id, title, content, checked = false }) => {
     console.log(id);
 
     const data = await axiosInstance2.patch(`/todo/${id}`, {
-        id,
-        title,
-        content,
-        checked,
+        id: id,
+        title: title,
+        content: content,
+        checked: checked,
     });
     console.log(data);
 

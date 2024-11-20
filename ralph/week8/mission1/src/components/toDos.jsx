@@ -19,11 +19,13 @@ const Todo = () => {
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
     // const { deleteData, todolist } = DeleteTodo();
+
     const handleSubmit = async (e) => {
         // e.preventDefault();
         await createTodo({ title, content, checked });
     };
 
+    //useQuery 쓰면 그냥 받아 올 수 있는데 ;;
     useEffect(() => {
         const getData = async () => {
             const data = await getTodoList({ title: search });
@@ -61,7 +63,10 @@ const Todo = () => {
     const deleteData = async (id) => {
         try {
             await deleteTodo({ id }); // 특정 Todo 삭제
-            setTodoList((a) => a.filter((todo) => todo.id !== id)); // 삭제된 항목 제외
+            setTodoList((prev) => prev.filter((todo) => todo.id !== id)); // 여기 있는 prev는 기존에 todoList state 안에 들어 있는 배열이 자동으로 들어간다
+            // setTodoList가 콜백 함수 형태로 호출될 때, React는 자동으로 현재 상태 (todoList) 값을 prev라는 매개변수에 전달합니다. 이 매개변수는 상태 업데이트를 계산할 때 사용할 수 있도록 React에서 관리
+            // setTodoList 같은 setState를 호출할 때, 이전 상태를 기반으로 새로운 상태를 계산하려면 콜백 함수를 사용
+            //(prev) => prev.filter((todo) => todo.id !== id) : 콜백 함수
         } catch (error) {
             console.error("Error deleting todo:", error.message);
         }
