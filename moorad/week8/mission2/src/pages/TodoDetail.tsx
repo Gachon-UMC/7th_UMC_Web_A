@@ -15,6 +15,7 @@ type Todo = {
 const TodoDetail = () => {
     const { id } = useParams();
     const [todo, setTodo] = useState<Todo[]>();
+
     useEffect(() => {
         const getTodoById = async () => {
             const res = await todoInstance.get(`/todo/${id}`);

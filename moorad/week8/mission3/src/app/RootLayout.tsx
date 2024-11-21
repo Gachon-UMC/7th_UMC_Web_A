@@ -15,7 +15,7 @@ const RootLayout = () => {
 
 const Main = styled.main`
     width: 100%;
-    padding: 1.5rem 2rem;
+    padding: 0rem 2rem;
 `;
 
 export default RootLayout;

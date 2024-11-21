@@ -20,6 +20,7 @@ const InputContainer = () => {
             alert("오류 발생");
         }
     };
+
     return (
         <form
             className="flex flex-col justify-center items-center  w-[40vw] gap-2"

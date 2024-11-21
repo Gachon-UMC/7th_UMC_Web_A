@@ -1,44 +1,18 @@
 import styled from "styled-components";
-import { schema } from "../shared/schema/signInSchema";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { internalServerInstance } from "../shared/instance/apiInstance";
-import { useNavigate } from "react-router-dom";
-type signInType = z.infer<typeof schema>;
+import usePostAccount from "../shared/hooks/usePostAccount";
 
 const SignIn = () => {
-    const navigate = useNavigate();
-
-    const handleLogin = useMutation({
-        mutationFn: async (data: signInType) =>
-            await internalServerInstance.post("/auth/login", data),
-
-        onSuccess: (res) => {
-            const token = res.data.accessToken;
-            localStorage.setItem("accessToken", token);
-            alert("로그인 성공 !");
-            navigate("/");
-        },
-        onError: (err) => {
-            console.log(err);
-            alert("일치하지 않는 이메일 또는 비밀번호입니다.");
-        },
-    });
-
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid },
-    } = useForm<signInType>({
-        resolver: zodResolver(schema),
-        mode: "onChange",
-    });
+        errors,
+        isValid,
+        mutation: handleSignIn,
+    } = usePostAccount("signin");
 
     return (
         <SignInContainer
-            onSubmit={handleSubmit((data) => handleLogin.mutate(data))}
+            onSubmit={handleSubmit((data) => handleSignIn.mutate(data))}
         >
             <input
                 type="text"

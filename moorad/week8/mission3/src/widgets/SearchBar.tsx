@@ -1,9 +1,21 @@
+import { useCallback } from "react";
 import styled from "styled-components";
-
+import { debounce } from "lodash";
+import { useSetRecoilState } from "recoil";
+import { searchValueState } from "../shared/recoil/searchValueState";
 const SearchBar = () => {
+    const setSearchValue = useSetRecoilState(searchValueState);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value);
+    };
+    const debouncedOnChange = useCallback(debounce(handleChange, 500), []);
     return (
         <SearchBarContainer>
-            <input type="text" placeholder="검색 값을 입력해주세요." />
+            <input
+                type="text"
+                placeholder="검색 값을 입력해주세요."
+                onChange={debouncedOnChange}
+            />
         </SearchBarContainer>
     );
 };
