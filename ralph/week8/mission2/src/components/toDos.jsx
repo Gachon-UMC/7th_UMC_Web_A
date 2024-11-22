@@ -11,27 +11,18 @@ import { queryClient } from "../App";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 import styled from "styled-components";
+import TodoForm from "./todoForm";
+import { useRecoilState } from "recoil";
+import { contentState, idState, searchState, titleState } from "./atom";
+// import GetTodo from "./getTodo";
 const ToDos = () => {
-    const [id, setId] = useState();
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [search, setSearch] = useState("");
-    const [buttonDisable, setButtonDisable] = useState(true);
+    const [id, setId] = useRecoilState(idState);
+    const [search, setSearch] = useRecoilState(searchState);
+    const [title, setTitle] = useRecoilState(titleState);
+    const [content, setContent] = useRecoilState(contentState); // useRecoilState() 에서 ()안에 있는 값은 atom.js에서 정의한 각 state 별 key 값이다
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
-        e.stopPropagation();
-        setTitle("");
-        setContent(""); // 입력칸 초기화
-    };
 
     // ToDo 생성하기
-    const createTodos = async () => {
-        const a = await createTodo({ title, content });
-        console.log(a);
-
-        if (a) return setButtonDisable(false);
-        else return setButtonDisable(true);
-    };
 
     // ToDo 가져오기
     const {
@@ -48,8 +39,10 @@ const ToDos = () => {
     // 이건 useMutation의 반환값을 구조분해할당으로 받은 것으로 이렇게 하거나
     // 아니면 이렇게 하나의 변수에 반환값을 다 받은 다음
     //const mutation = useMutation({블라블라}) 이런식으로 하고 호출할때 mutation.mutate 이렇게 해서 실행 시켜줘야함
+    // 근데 그냥 구조분해할당으로 받아서
+    // 145번째 줄 처럼 해도 되고 mutate라는 함수에 이름을 지정해줘도 된다.
 
-    const { mutate: deleteTodoMutation } = useMutation({
+    const { mutate } = useMutation({
         mutationFn: deleteTodo,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["gettodo"] });
@@ -58,6 +51,8 @@ const ToDos = () => {
             console.log(error);
         },
     });
+
+    console.log(mutate);
 
     // toDo 수정하기
     const { mutate: patchTodoMutation } = useMutation({
@@ -81,39 +76,7 @@ const ToDos = () => {
 
     return (
         <>
-            <FormStyle onSubmit={handleSubmit}>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        fontSize: "30px",
-                        margin: "20px",
-                    }}
-                >
-                    검색
-                </div>
-                <InputStyleDiv>
-                    <InputStyle
-                        placeholder="검색하시오."
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
-                    <InputStyle
-                        placeholder="제목을 입력하시오."
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <InputStyle
-                        placeholder="내용을 입력하시오."
-                        onChange={(e) => setContent(e.target.value)}
-                    />
-                    <ButtonStyle
-                        onClick={createTodos}
-                        disabled={!(title && content)}
-                    >
-                        todo 생성
-                        {/* // 버튼 dusabled처리 완료 ToDo 생성 */}
-                    </ButtonStyle>
-                </InputStyleDiv>
-            </FormStyle>
+            <TodoForm />
 
             {isLoading ? (
                 <Spinner />
@@ -178,8 +141,11 @@ const ToDos = () => {
                                 )}
 
                                 <TodoButton
-                                    onClick={() =>
-                                        deleteTodoMutation({ id: todo.id })
+                                    onClick={
+                                        () => mutate({ id: todo.id })
+                                        // 이렇게 사용하는 것
+                                        // 위에서 mutate를 구조분해할당으로 받음
+                                        // deleteTodoMutation({ id: todo.id })
                                     }
                                 >
                                     삭제
@@ -195,31 +161,8 @@ const ToDos = () => {
 
 export default ToDos;
 
-const FormStyle = styled.form`
-    display: flex;
-    flex-direction: column;
-`;
-const InputStyleDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-`;
-const InputStyle = styled.input`
-    width: 40vw;
-    border-radius: 10px;
-    text-align: center;
-    justify-content: center;
-`;
-const ButtonStyle = styled.button`
-    width: 40vw;
-    border-radius: 10px;
-    text-align: center;
-    padding: 2px;
-    background-color: skyblue;
-`;
+// css
+// 마우스 포인터 변경하는 css 도 적용 (cursor: pointer;)
 
 const TodoDiv = styled.div`
     display: flex;
@@ -233,6 +176,7 @@ const TodoDiv = styled.div`
 
 const TodoButton = styled.button`
     border-radius: 10px;
+    cursor: pointer;
 `;
 
 const TodoDetail = styled.div`
@@ -240,6 +184,8 @@ const TodoDetail = styled.div`
     flex-direction: column;
     flex-shrink: 1;
     text-align: center; // 글자 중간으로 두기
+    cursor: pointer;
+    gap: 1px;
 `;
 
 const TodoDetailDiv = styled.div`
@@ -258,6 +204,7 @@ const TodoDetailInput = styled.input`
     text-align: center;
     border-radius: 5px;
     gap: 1px;
+    cursor: pointer;
 `;
 
 const TodoDetailDiv2 = styled.div`

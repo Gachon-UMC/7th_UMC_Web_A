@@ -1,16 +1,22 @@
 // import React from "react";
-// import { axiosInstance2 } from "../../../../week7/mission2/src/apis/axiosInstance2";
+// import { useQuery } from "react-query";
+// import { getTodoList } from "./todoApi";
+// import { useRecoilState } from "recoil";
+// import { searchState } from "./atom";
+// const GetTodo = () => {
+//     const [search, setSearch] = useRecoilState(searchState);
+//     const {
+//         data: todos,
+//         isError,
+//         isLoading,
+//         isPending,
+//     } = useQuery({
+//         queryKey: ["gettodo", search],
+//         queryFn: () => getTodoList({ title: search }),
+//     });
+//     console.log(todos);
 
-// const GetTodo = async () => {
-//     try {
-//         const response = await axiosInstance2.get("/todo");
-//         // const getTodoData = response?.data[0];
-//         console.log(response.data[0]);
-
-//         return response.data[0];
-//     } catch (error) {
-//         console.error(error);
-//     }
+//     return { todos, isError, isLoading, isPending };
 // };
 
 // export default GetTodo;

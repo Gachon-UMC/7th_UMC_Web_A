@@ -5,6 +5,7 @@ import Errorpage from "./components/errorpage";
 import GetTodoDetails from "./components/getTodoDetails";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 export const queryClient = new QueryClient();
+import { RecoilRoot } from "recoil";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -19,11 +20,11 @@ const router = createBrowserRouter([
 ]);
 const App = () => {
     return (
-        <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router}>
-                <ToDos />
-            </RouterProvider>
-        </QueryClientProvider>
+        <RecoilRoot>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router}></RouterProvider>
+            </QueryClientProvider>
+        </RecoilRoot>
     );
 };
 
