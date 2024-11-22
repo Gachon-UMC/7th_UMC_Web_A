@@ -166,7 +166,7 @@ const ToDos = () => {
                                 </TodoDetailDiv>
                             </div>
 
-                            <div style={{ display: "flex", margin: "2px" }}>
+                            <div style={{ display: "flex" }}>
                                 {id === todo.id ? (
                                     <TodoButton onClick={() => saveTodo(todo)}>
                                         저장
