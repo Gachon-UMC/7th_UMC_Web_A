@@ -35,7 +35,7 @@ git status
 1. 변경 사항 스테이징 및 커밋:
 ```bash
 git add .
-git commit -m "add week8 mission3 project"
+git commit -m "feat: add week8 mission3 project"
 ```
 2. 원격 저장소로 푸시:
 ```bash
