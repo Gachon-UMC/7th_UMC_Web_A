@@ -7,6 +7,8 @@ import { useEffect } from "react";
 
 // 아이콘 추가
 import { BsFillBasket3Fill } from "react-icons/bs";
+import styled from "styled-components";
+import { FaLeaf } from "react-icons/fa";
 
 const PlayList = () => {
     const list = cartItems;
@@ -24,15 +26,49 @@ const PlayList = () => {
         dispatch(clearCartItem());
     };
     return (
-        <div>
-            <div className="header">
-                <div>UMC Playlist</div>
-                <div>
+        <div style={{ backgroundColor: "#CED8F6", height: "100%" }}>
+            <HeaderDiv className="header">
+                <div
+                    style={{
+                        display: "flex",
+                        color: "white",
+                        fontSize: "25px",
+                        alignItems: "center",
+                    }}
+                >
+                    UMC Playlist
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        color: "white",
+                        fontSize: "25px",
+                        alignItems: "center",
+                    }}
+                >
                     <BsFillBasket3Fill />
                     {sum}
                 </div>
-            </div>
-            <div className="main">
+            </HeaderDiv>
+
+            <div
+                className="main"
+                style={{
+                    height: "90%",
+                    width: "55vw",
+                    margin: "auto",
+                    marginTop: "30px",
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        fontSize: "30px",
+                    }}
+                >
+                    &lt; 당신이 선택한 음반 &gt;
+                </div>
                 {/* items로 map 메서드 이용 */}
                 {items?.map((playlist) => (
                     <MusicDetail
@@ -46,12 +82,66 @@ const PlayList = () => {
                     />
                 ))}
             </div>
-            <div className="footer">
-                <button onClick={handleClearCartItem}>장바구니 초기화</button>
-                <div>총 가격: {pricesum}</div>
+            <div
+                className="footer"
+                style={{
+                    width: "55vw",
+                    margin: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                <hr
+                    style={{
+                        border: "1.5px solid black",
+                        margin: "60px 0 20px 0",
+                    }}
+                />
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginLeft: "5px",
+                        marginRight: "5px",
+                    }}
+                >
+                    <div style={{ fontSize: "18px" }}>총 가격 </div>
+                    <div style={{ fontSize: "18px" }}>₩ {pricesum}</div>
+                </div>
+
+                <button
+                    onClick={handleClearCartItem}
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "10vw",
+                        // height: "3vh",
+                        margin: "auto",
+                        marginTop: "6px",
+                        border: "1px solid red",
+                        borderRadius: "5px",
+                        backgroundColor: "transparent",
+                        color: "red",
+                        fontSize: "15px",
+                        textAlign: "center",
+                        alignItems: "center",
+                        boxShadow: "inset 2px 2px 5px gray",
+                    }}
+                    disabled={sum === 0}
+                >
+                    장바구니 초기화
+                </button>
             </div>
         </div>
     );
 };
 
 export default PlayList;
+
+//css
+const HeaderDiv = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    height: 5vh;
+    background-color: #5858fa;
+`;

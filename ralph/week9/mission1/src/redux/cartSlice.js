@@ -18,12 +18,12 @@ const cartSlice = createSlice({
             console.log(a.length);
 
             //  초기 데이터가 기본적으로 amount가 1 이 들어가 있어서 priceSum 이라는 전체 가격의 합 관련된 상태값을 구하기 위해 다음 과 같은 작업을 함
-            let k = 0;
+            let pricesum = 0;
             for (let i = 0; i < a.length; i++) {
-                k += a[i];
+                pricesum += a[i];
             }
             // 초기값을 priceSum 초기값으로 최신화 해줌
-            state.priceSum = k;
+            state.priceSum = pricesum;
 
             state.items = action.payload;
             console.log(state.items);
@@ -42,11 +42,12 @@ const cartSlice = createSlice({
             const item = state.items.find((item) => item.id === action.payload);
             console.log(item.price);
 
-            state.priceSum = state.priceSum + Number(item.price);
             console.log(action.payload);
             console.log(state.items.length);
 
             if (item) {
+                console.log(item.price);
+                state.priceSum += Number(item.price);
                 item.amount += 1; // 해당 ID의 amount 증가
                 state.sum += 1; // 전체 선택한 목록의 수 +1
             }
@@ -68,26 +69,29 @@ const cartSlice = createSlice({
             console.log(item.price);
 
             if (item) {
-                item.amount -= 1; // 해당 ID의 amount 증가
+                state.priceSum -= Number(item.price);
+                item.amount -= 1; // 해당 ID의 amount 감소
                 state.sum -= 1; // 전체 선택한 목록의 수 - 1
             }
-            state.priceSum = state.priceSum - item.price;
+
             console.log(state.sum);
         },
 
         // amount 가 0이 되면 목록에서 사라지는 메서드
         removeItem: (state, action) => {
-            // console.log(state.items);
             console.log(action.payload);
+
             const item = state.items.find((item) => item.id === action.payload);
+
             console.log(item);
 
             if (item) {
                 state.items = state.items.filter(
                     (Item) => Item.id !== action.payload
                 );
-                console.log(state.items);
-
+                state.priceSum -= Number(item.price); // 여기도 이걸 넣어줘야 하는 이유: amount가 1 일때는 아래 버튼을 누르면 removeItem 메서드가 동작하도록 설정을 해놓았기
+                //때문에 amount 가 1일때 목록에서 사라지면서 총 가격에서도 그 항목의 가격만큼 줄어야 하기 때문에
+                state.sum -= 1; // 위와 똑같이 전체 개수도 1개씩 줄어야 하므로 다음과 같이 적어 놓음
                 console.log("성공");
             }
         },
@@ -95,10 +99,11 @@ const cartSlice = createSlice({
         // 전체 목록을 다 초기화 시키는 메서드
         clearCartItem: (state, action) => {
             state.items = []; // 배열을 초기화 시켜서 아무것도 안보이게 해버림
-            console.log("성공");
+            state.priceSum = 0; // 초기화 버튼을 누르면 전체 가격을 0원으로 만들어 주기
+            state.sum = 0; // 위에 뜨는 전체 개수를 0개로 만들어 주기
         },
 
-        //
+        // 사용 안함
         calculateTotals: (state, action) => {
             state.value = action.payload;
         },
