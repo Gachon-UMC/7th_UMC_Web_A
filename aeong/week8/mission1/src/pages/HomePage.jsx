@@ -34,7 +34,7 @@ const HomePage = () => {
       setTodos((prev) => [...prev, newTodo]);
     } catch (error) {
       console.error("생성 에러", error);
-      ㄴ;
+
       alert("생성 실패");
     }
   };
