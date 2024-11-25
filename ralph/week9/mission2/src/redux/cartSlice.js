@@ -68,7 +68,7 @@ const cartSlice = createSlice({
             const item = state.items.find((item) => item.id === action.payload);
 
             console.log(item.price);
-
+            // item.price 값이 숫자 타입이 아니여서 앞에 Number 붙임
             if (item) {
                 state.priceSum -= Number(item.price);
                 item.amount -= 1; // 해당 ID의 amount 감소

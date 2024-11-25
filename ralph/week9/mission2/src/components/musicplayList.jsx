@@ -1,27 +1,30 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import cartItems from "./cartItems";
 import MusicDetail from "./musicDetail";
-import { useDispatch, useSelector } from "react-redux";
-import { clearCartItem, setPlayList } from "../redux/cartSlice";
-import { useEffect } from "react";
+import { setPlayList } from "../redux/cartSlice";
+import { showModal } from "../modal/modalSlice";
+import ModalPage from "../modal/modalPage";
+
 // 아이콘 추가
 import { BsFillBasket3Fill } from "react-icons/bs";
 import styled from "styled-components";
 
-import { showModal, closeModal } from "../modal/modalSlice";
-import Modal from "react-modal";
 const PlayList = () => {
-    const list = cartItems;
     const dispatch = useDispatch();
+
+    // list 받아오기
+    const list = cartItems;
+
     const sum = useSelector((state) => state.playList.sum);
     const items = useSelector((state) => state.playList.items);
     const pricesum = useSelector((state) => state.playList.priceSum);
-    const modalstate = useSelector((state) => state.modal.modalState);
-    console.log(modalstate);
 
     useEffect(() => {
         console.log("Initializing Playlist:", list);
-        dispatch(setPlayList(list)); // Redux 상태에 데이터 추가
+        dispatch(setPlayList(list)); // Redux 상태에 데이터 추가 , 상태값에 추가하기
     }, []);
 
     // 초기화 버튼을 누르면 showModal 메서드가 실행되도록 함
@@ -29,17 +32,8 @@ const PlayList = () => {
         dispatch(showModal());
     };
 
-    const handleYesModal = () => {
-        dispatch(clearCartItem()); //  초기화 버튼을 누르고 "예" 버튼을 누르면 전첵 목록 지워지도록 상태를 변경
-        dispatch(closeModal()); // "예" 버튼을 누르면 모달 창 닫게 하는 코드
-    };
-
-    const handleNoModal = () => {
-        dispatch(closeModal()); // "아니요" 버튼 누르면 모달 창 닫게 하는 코드
-    };
-
     return (
-        <div style={{ backgroundColor: "#CED8F6", height: "auto" }}>
+        <RootDiv>
             <HeaderDiv className="header">
                 <HeaderTitleDiv>UMC Playlist</HeaderTitleDiv>
                 <HeaderSumDiv>
@@ -65,12 +59,9 @@ const PlayList = () => {
                 ))}
             </MainDiv>
             <FooterDiv className="footer">
-                <hr
-                    style={{
-                        border: "1.5px solid black",
-                        margin: "60px 0 20px 0",
-                    }}
-                />
+                {/* 구분선 만들기 */}
+                <FooterHorizonDiv />
+
                 <FooterDetailDiv>
                     <FooterDetailSumDiv> 총 가격 </FooterDetailSumDiv>
                     <FooterDetailSumDiv>₩ {pricesum}</FooterDetailSumDiv>
@@ -83,47 +74,18 @@ const PlayList = () => {
                     장바구니 초기화
                 </FooterResetButton>
 
-                <Modal
-                    isOpen={modalstate}
-                    style={{
-                        content: {
-                            width: "30vw",
-                            height: "15vh",
-                            margin: "auto",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-evenly",
-                            alignItems: "center",
-                            border: "2px solid #d8d8d8",
-                            borderRadius: "8px",
-                            boxShadow: "2px 1px #e6e6e6",
-                        },
-                    }}
-                >
-                    <ModalTitleDiv>
-                        담아 놓으신 모든 음반을 삭제 하시겠습니까?
-                    </ModalTitleDiv>
-                    <ModalButtonDiv>
-                        <ModalButtonDetailDiv
-                            onClick={handleYesModal}
-                            bteStyle="blue"
-                        >
-                            네
-                        </ModalButtonDetailDiv>
-                        <ModalButtonDetailDiv
-                            onClick={handleNoModal}
-                            bteStyle="red"
-                        >
-                            아니요
-                        </ModalButtonDetailDiv>
-                    </ModalButtonDiv>
-                </Modal>
+                <ModalPage />
             </FooterDiv>
-        </div>
+        </RootDiv>
     );
 };
 export default PlayList;
 //css
+
+const RootDiv = styled.div`
+    background-color: #ced8f6;
+    height: auto;
+`;
 const HeaderDiv = styled.div`
     display: flex;
     justify-content: space-evenly;
@@ -164,6 +126,11 @@ const FooterDiv = styled.div`
     flex-direction: column;
 `;
 
+const FooterHorizonDiv = styled.hr`
+    border: 1.5px solid black;
+    margin: 60px 0 20px 0;
+`;
+
 const FooterDetailDiv = styled.div`
     display: flex;
     justify-content: space-between;
@@ -191,36 +158,3 @@ const FooterResetButton = styled.button`
     align-items: center;
     cursor: pointer;
 `;
-
-const ModalTitleDiv = styled.div`
-    font-size: 18px;
-`;
-
-const ModalButtonDiv = styled.div`
-    display: flex;
-    align-items: space-evenly;
-    gap: 7vw;
-`;
-
-const ModalButtonDetailDiv = styled.button`
-    border: 1px solid ${(props) => props.bteStyle};
-    width: 65px;
-    background-color: white;
-    border-radius: 5px;
-    font-size: 15px;
-    box-shadow: 1px 1px ${(props) => props.bteStyle};
-    cursor: pointer;
-`;
-
-// const ModalDiv = styled.div`
-//     width: 30vw;
-//     height: 15vh;
-//     margin: auto;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-evenly;
-//     align-items: center;
-//     border: 2px solid #d8d8d8;
-//     border-radius: 8px;
-//     box-shadow: 2px 1px #e6e6e6;
-// `;

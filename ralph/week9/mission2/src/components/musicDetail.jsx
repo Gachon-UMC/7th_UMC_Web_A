@@ -20,7 +20,7 @@ const MusicDetail = ({ img, id, title, singer, amount, price }) => {
         dispatch(decreaseItem(id));
     };
 
-    // 지우는 액션 사용
+    // 지우는 액션 사용 ( tkdxo)
     const handleRemoveItem = () => {
         dispatch(removeItem(id));
     };
@@ -32,72 +32,83 @@ const MusicDetail = ({ img, id, title, singer, amount, price }) => {
     );
 
     return (
-        <div style={{ display: "flex", width: "auto", marginTop: "20px" }}>
-            <div style={{ marginLeft: "5px" }}>
+        <MainDiv>
+            <ImgDiv>
                 <img src={img} width="75px" height="75px"></img>
-            </div>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    flexGrow: "1",
-                    justifyContent: "center",
-                    gap: "5px",
-                    marginLeft: "15px",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        flexWrap: " wrap",
-                    }}
-                >
+            </ImgDiv>
+            <MainMusicInfoDiv>
+                <MainMusicDetailDiv>
                     <div>{title}</div>
                     <div>&nbsp;|&nbsp;</div>
                     <div>{singer}</div>
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "flex-start ",
-                        color: "gray",
-                    }}
-                >
-                    ₩ {price}
-                </div>
-            </div>
+                </MainMusicDetailDiv>
+                <MainMusicPriceDiv>₩ {price}</MainMusicPriceDiv>
+            </MainMusicInfoDiv>
 
-            <div>
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
-                    }}
+            <MainMusicSideDiv>
+                <ButtonStyle onClick={handleIncrease}>
+                    <FaChevronUp />
+                </ButtonStyle>
+                <MainTotalDiv>{totalamount}</MainTotalDiv>
+
+                {/* onClick 속성 안에 조건 달기 */}
+
+                <ButtonStyle
+                    onClick={
+                        amount === 1
+                            ? () => handleRemoveItem()
+                            : () => handleDecrease()
+                    }
                 >
-                    <ButtonStyle onClick={handleIncrease}>
-                        <FaChevronUp />
-                    </ButtonStyle>
-                    <div style={{ display: "flex" }}>{totalamount}</div>
-                    {/* onClick 속성 안에 조건 달기 */}
-                    <ButtonStyle
-                        onClick={
-                            amount === 1
-                                ? () => handleRemoveItem()
-                                : () => handleDecrease()
-                        }
-                    >
-                        <FaChevronDown />
-                    </ButtonStyle>
-                </div>
-            </div>
-        </div>
+                    <FaChevronDown />
+                </ButtonStyle>
+            </MainMusicSideDiv>
+        </MainDiv>
     );
 };
 export default MusicDetail;
 
 //css
+
+const MainDiv = styled.div`
+    display: flex;
+    width: auto;
+    margin-top: 20px;
+`;
+
+const ImgDiv = styled.div`
+    margin-left: 5px;
+`;
+
+const MainMusicInfoDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 5px;
+    margin-left: 15px;
+`;
+const MainMusicDetailDiv = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+const MainMusicPriceDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    color: gray;
+`;
+
+const MainMusicSideDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+`;
+
+const MainTotalDiv = styled.div`
+    display: flex;
+`;
 const ButtonStyle = styled.button`
     border: white;
     cursor: pointer;
