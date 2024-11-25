@@ -40,6 +40,8 @@ const Header = () => {
                     )}`,
                 },
             });
+            console.log(res.data.email);
+            console.log(res.data.email.split("@"));
             const name = res.data.email.split("@")[0];
             setUserName(name);
         };
@@ -77,6 +79,7 @@ const LoggedInHeader = ({ userName }: { userName: string | undefined }) => {
         </div>
     );
 };
+
 const LoggedOutHeader = () => {
     const navigate = useNavigate();
     return (

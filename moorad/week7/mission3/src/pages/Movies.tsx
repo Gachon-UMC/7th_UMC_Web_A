@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
 import getMoviesData from "../apis/getMoviesData";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 interface MovieType {
     adult: boolean;
@@ -35,6 +35,7 @@ const Movies = () => {
     });
 
     const movies = data?.results;
+
     if (isLoading) {
         return <div>Loading중..</div>;
     }
