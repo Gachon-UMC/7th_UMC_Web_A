@@ -11,10 +11,13 @@ const useGetMoviesData = (category: string) => {
     const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
         queryKey: ["movies", category, searchValue],
         queryFn: async ({ pageParam }) => {
-            await delay(700);
+            // 의도적으로 delay를 적용하여 주었습니다.
+            await delay(400);
+            // searchValue가 입력되지 않는다면 기본 영화 데이터 api를 사용합니다.
             if (searchValue === "") {
                 return getMoviesData(category, pageParam);
             } else {
+                // searchValue가 입력된다면 영화 검색 데이터 api를 사용합니다.
                 return getSearchMoviesData(searchValue, pageParam);
             }
         },

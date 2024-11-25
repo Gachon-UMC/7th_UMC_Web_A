@@ -1,22 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-interface MovieType {
-    adult: boolean;
-    backdrop_path: string | null;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-}
+import { MovieType } from "../shared/\btypes";
 
 const imgURL = "https://image.tmdb.org/t/p/w200";
 
@@ -33,46 +17,6 @@ const Card = ({ movie }: { movie: MovieType }) => {
         </CardContainer>
     );
 };
-
-// const Skeleton = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     width: 90px;
-//     height: 250px;
-//     border: 1px solid black;
-//     overflow: hidden;
-//     background-color: #e0e0e0;
-//     animation: pulse 1.5s infinite ease-in-out;
-
-//     & > div {
-//         width: 100%;
-//         height: 200px;
-//         background-color: #c0c0c0;
-//         border-radius: 10px;
-//         margin-bottom: 10px;
-//     }
-
-//     & > span {
-//         width: 80%;
-//         height: 10px;
-//         background-color: #c0c0c0;
-//         border-radius: 5px;
-//         margin: 5px 0;
-//     }
-
-//     @keyframes pulse {
-//         0% {
-//             background-color: #e0e0e0;
-//         }
-//         50% {
-//             background-color: #c0c0c0;
-//         }
-//         100% {
-//             background-color: #e0e0e0;
-//         }
-//     }
-// `;
 
 const CardContainer = styled.div`
     display: flex;

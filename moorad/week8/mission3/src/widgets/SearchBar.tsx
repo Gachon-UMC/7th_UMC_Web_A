@@ -8,7 +8,9 @@ const SearchBar = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
     };
+    // useCallback을 이용해 debounce timer가 매번 초기화되지 않도록 사용.
     const debouncedOnChange = useCallback(debounce(handleChange, 500), []);
+
     return (
         <SearchBarContainer>
             <input

@@ -14,6 +14,7 @@ const SignUp = () => {
         <SignUpContainer
             onSubmit={handleSubmit((data) => handleSignUp.mutate(data))}
         >
+            <h1>회원가입</h1>
             <input
                 placeholder="이메일을 입력하세요."
                 type="text"
@@ -48,12 +49,14 @@ const SignUp = () => {
 const SignUpContainer = styled.form`
     width: 100%;
     height: calc(100vh - 12vh);
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    & > h1 {
+        font-size: 2rem;
+    }
 
     & > input {
         width: 40%;
