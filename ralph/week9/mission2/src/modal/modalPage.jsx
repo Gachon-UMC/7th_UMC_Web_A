@@ -27,7 +27,7 @@ const ModalPage = () => {
             isOpen={modalstate}
             style={{
                 content: {
-                    width: "30vw",
+                    width: "25vw",
                     height: "15vh",
                     margin: "auto",
                     display: "flex",
@@ -59,7 +59,7 @@ export default ModalPage;
 
 //css
 const ModalTitleDiv = styled.div`
-    font-size: 18px;
+    font-size: 1.5rem;
 `;
 
 const ModalButtonDiv = styled.div`
@@ -69,11 +69,12 @@ const ModalButtonDiv = styled.div`
 `;
 
 const ModalButtonDetailDiv = styled.button`
-    border: 1px solid ${(props) => props.btnstyle};
-    width: 65px;
+    border: 1.5px solid ${(props) => props.$btnstyle};
+    width: 70px;
     background-color: white;
     border-radius: 5px;
-    font-size: 15px;
-    box-shadow: 1px 1px ${(props) => props.bteStyle};
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 1.5px 1px ${(props) => props.$btnStyle};
     cursor: pointer;
 `;

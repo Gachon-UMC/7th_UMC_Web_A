@@ -11,23 +11,11 @@ const cartSlice = createSlice({
     reducers: {
         // 초기 데이터 생성
         setPlayList: (state, action) => {
-            console.log("Setting Playlist:", action.payload);
             console.log(action.payload.length);
-
-            const a = action.payload.map((list) => Number(list.price));
-
-            console.log(a.length);
-
-            //  초기 데이터가 기본적으로 amount가 1 이 들어가 있어서 priceSum 이라는 전체 가격의 합 관련된 상태값을 구하기 위해 다음 과 같은 작업을 함
-            let pricesum = 0;
-            for (let i = 0; i < a.length; i++) {
-                pricesum += a[i];
-            }
-            // 초기값을 priceSum 초기값으로 최신화 해줌
-            state.priceSum = pricesum;
-
+            // setPlayList(list) 이렇게 받은 list가 action.payload에 들어가 있기 때문에 다음과 같은 코드로 items state 값을 변경해줌
             state.items = action.payload;
             console.log(state.items);
+            // 추가된 배열의 길이를 이용해서 전체 항목 수를 구함
             state.sum = state.items.length;
             console.log(state.items.length);
             console.log(state.sum);
@@ -104,9 +92,20 @@ const cartSlice = createSlice({
             state.sum = 0; // 위에 뜨는 전체 개수를 0개로 만들어 주기
         },
 
-        // 사용 안함
+        //
         calculateTotals: (state, action) => {
-            state.value = action.payload;
+            // item.price 값이 숫자 타입이 아니여서 앞에 Number 붙임
+            const a = action.payload.map((list) => Number(list.price));
+
+            console.log(a.length);
+
+            //  초기 데이터가 기본적으로 amount가 1 이 들어가 있어서 priceSum 이라는 전체 가격의 합 관련된 상태값을 구하기 위해 다음 과 같은 작업을 함
+            let pricesum = 0;
+            for (let i = 0; i < a.length; i++) {
+                pricesum += a[i];
+            }
+            // 초기값을 priceSum 초기값으로 최신화 해줌
+            state.priceSum = pricesum;
         },
     },
 });

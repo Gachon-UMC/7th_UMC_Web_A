@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import cartItems from "./cartItems";
 import MusicDetail from "./musicDetail";
-import { setPlayList } from "../redux/cartSlice";
+import { calculateTotals, setPlayList } from "../redux/cartSlice";
 import { showModal } from "../modal/modalSlice";
 import ModalPage from "../modal/modalPage";
 
@@ -23,8 +23,8 @@ const PlayList = () => {
     const pricesum = useSelector((state) => state.playList.priceSum);
 
     useEffect(() => {
-        console.log("Initializing Playlist:", list);
         dispatch(setPlayList(list)); // Redux 상태에 데이터 추가 , 상태값에 추가하기
+        dispatch(calculateTotals(list));
     }, []);
 
     // 초기화 버튼을 누르면 showModal 메서드가 실행되도록 함
