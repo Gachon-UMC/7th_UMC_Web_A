@@ -78,7 +78,8 @@ const cartSlice = createSlice({
                 state.items = state.items.filter(
                     (Item) => Item.id !== action.payload
                 );
-                state.priceSum -= Number(item.price); // 여기도 이걸 넣어줘야 하는 이유: amount가 1 일때는 아래 버튼을 누르면 removeItem 메서드가 동작하도록 설정을 해놓았기
+                state.priceSum -= Number(item.price);
+                // 여기도 이걸 넣어줘야 하는 이유: amount가 1 일때는 아래 버튼을 누르면 removeItem 메서드가 동작하도록 설정을 해놓았기
                 //때문에 amount 가 1일때 목록에서 사라지면서 총 가격에서도 그 항목의 가격만큼 줄어야 하기 때문에
                 state.sum -= 1; // 위와 똑같이 전체 개수도 1개씩 줄어야 하므로 다음과 같이 적어 놓음
                 console.log("성공");
@@ -99,6 +100,7 @@ const cartSlice = createSlice({
 
             console.log(a.length);
 
+            // 만약 amount가 0 으로 설정되어 있으면 그냥 let pricesum=0 이렇게 하면 되는데
             //  초기 데이터가 기본적으로 amount가 1 이 들어가 있어서 priceSum 이라는 전체 가격의 합 관련된 상태값을 구하기 위해 다음 과 같은 작업을 함
             let pricesum = 0;
             for (let i = 0; i < a.length; i++) {
