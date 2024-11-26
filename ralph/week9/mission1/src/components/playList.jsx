@@ -8,7 +8,6 @@ import { useEffect } from "react";
 // 아이콘 추가
 import { BsFillBasket3Fill } from "react-icons/bs";
 import styled from "styled-components";
-import { FaLeaf } from "react-icons/fa";
 
 const PlayList = () => {
     const list = cartItems;
@@ -25,6 +24,7 @@ const PlayList = () => {
     const handleClearCartItem = () => {
         dispatch(clearCartItem());
     };
+
     return (
         <div style={{ backgroundColor: "#CED8F6", height: "100%" }}>
             <HeaderDiv className="header">
@@ -125,7 +125,7 @@ const PlayList = () => {
                         fontSize: "15px",
                         textAlign: "center",
                         alignItems: "center",
-                        boxShadow: "inset 2px 2px 5px gray",
+                        cursor: "pointer",
                     }}
                     disabled={sum === 0}
                 >
@@ -135,9 +135,7 @@ const PlayList = () => {
         </div>
     );
 };
-
 export default PlayList;
-
 //css
 const HeaderDiv = styled.div`
     display: flex;
