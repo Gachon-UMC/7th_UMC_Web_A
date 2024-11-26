@@ -31,26 +31,5 @@ export const useCustomFetch = (url, method = "GET") => {
     }
   };
 
-  const updateTodo = async (id, updatedTodo) => {
-    try {
-      const response = await fetch(`http://localhost:3000/todo/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedTodo),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update todo");
-      }
-
-      return response;
-    } catch (error) {
-      console.error("Update error:", error);
-      throw error;
-    }
-  };
-
-  return { execute, updateTodo, loading, error };
+  return { execute, loading, error };
 };
