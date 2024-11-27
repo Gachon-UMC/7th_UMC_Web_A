@@ -80,7 +80,7 @@ const TodoPage = () => {
       <SearchBar onSearch={handleSearch} /> {/* 검색 바 추가 */}
       <TodoList
         todos={filteredTodos} // 필터링된 투두 목록 전달
-        onUpdateTodo={(updatedTodo) =>
+        onUpdateTodo={(updatedTodo) => // 문제 : 엉킬수도있음.... id가 다름?
           setTodos((prev) =>
             prev.map((todo) =>
               todo.id === updatedTodo.id ? { ...todo, ...updatedTodo } : todo
