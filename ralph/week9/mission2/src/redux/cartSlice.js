@@ -14,10 +14,17 @@ const cartSlice = createSlice({
             console.log(action.payload.length);
             // setPlayList(list) 이렇게 받은 list가 action.payload에 들어가 있기 때문에 다음과 같은 코드로 items state 값을 변경해줌
             state.items = action.payload;
+            const k = action.payload.map((list) => Number(list.amount));
+
             console.log(state.items);
+
             // 추가된 배열의 길이를 이용해서 전체 항목 수를 구함
-            state.sum = state.items.length;
-            console.log(state.items.length);
+            // 원래 sum을 구할 때 어짜피 amount는 1 이니까 배열의 길이로 해도 되겠구나 라고 생각해서
+            // 밑에와 같이 하면 잘못됨
+            // state.sum = action.payload.length 이렇게 했는데
+            // 이렇게 하면 만약 초기 데이터의 amount 값이 1이 아닌게 있으면 맞지 않기 떄문에 다음과 같이 reduce 메서드를 사용
+            state.sum = k.reduce((a, b) => a + b);
+
             console.log(state.sum);
             console.log(action.payload);
         },
@@ -29,6 +36,10 @@ const cartSlice = createSlice({
             console.log(state.items);
 
             const item = state.items.find((item) => item.id === action.payload);
+            // 별로 불친절함 // 딱 데이터 객체가 나올 줄 알았는데 이상한 게 출력됨
+
+            console.log(item);
+
             console.log(item.price);
 
             console.log(action.payload);
@@ -36,6 +47,7 @@ const cartSlice = createSlice({
 
             if (item) {
                 console.log(item.price);
+
                 state.priceSum += Number(item.price);
                 item.amount += 1; // 해당 ID의 amount 증가
                 state.sum += 1; // 전체 선택한 목록의 수 +1
@@ -54,6 +66,7 @@ const cartSlice = createSlice({
             // 각 항목 별로 다른 id 값으로 각 목록을 불러와야 겠다고 생각
             // map 메소드때 id 값을 보낸걸 받아서 그 항목이 어떤 항목인지 배열 형태로 item에 저장
             const item = state.items.find((item) => item.id === action.payload);
+            console.log(item);
 
             console.log(item.price);
             // item.price 값이 숫자 타입이 아니여서 앞에 Number 붙임

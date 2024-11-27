@@ -5,7 +5,7 @@ const cartItems = [
         singer: "BIG Naughty (서동현)",
         price: "25000",
         img: "https://image.bugsm.co.kr/album/images/500/40752/4075248.jpg",
-        amount: 1,
+        amount: 10,
     },
     {
         id: "recdRxBsE14Rr2VuJ",
