@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMutation, useQuery } from "react-query";
 import {
     createTodo,
@@ -14,22 +14,22 @@ import styled from "styled-components";
 import TodoForm from "./todoForm";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle, setTodoTitle } from "../redux2/title";
-import { setSearch } from "../redux2/search";
+
 import { setContent, setTodoContent } from "../redux2/content";
 import { setId, setTodoId } from "../redux2/id";
 const ToDos = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const getSearch = useSelector((state) => state.search.value);
     const getTitle = useSelector((state) => state.title.value);
     const getContent = useSelector((state) => state.content.value);
-    const getId = useSelector((state) => state.content.value);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    // const handleSearch = (e) => {
-    //     dispatch(setSearch(e.target.value));
-    // };
+    const getId = useSelector((state) => state.id.value);
+
     const handleTitle = (e) => {
         dispatch(setTitle(e.target.value));
     };
+
     const handleContent = (e) => {
         dispatch(setContent(e.target.value));
     };
@@ -77,13 +77,19 @@ const ToDos = () => {
     });
 
     const saveTodo = (todo) => {
-        patchTodoMutation({ id: todo.id, title: title, content: getContent });
+        patchTodoMutation({
+            id: todo.id,
+            title: getTitle,
+            content: getContent,
+        });
     };
 
     const editTodo = (todo) => {
-        dispatch(setTodoId(todo.id)),
-            dispatch(setTodoTitle(todo.title)),
-            dispatch(setTodoContent(todo.content));
+        console.log("수정");
+
+        dispatch(setId(todo.id)),
+            dispatch(setTitle(todo.title)),
+            dispatch(setContent(todo.content));
     };
 
     return (
@@ -96,12 +102,7 @@ const ToDos = () => {
                 todos[0]?.map((todo) => {
                     return (
                         <TodoDiv key={todo.id}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexBasis: "100%",
-                                }}
-                            >
+                            <TodoDivLeftSection>
                                 <input
                                     type="checkbox"
                                     defaultChecked={todo.checked}
@@ -135,9 +136,9 @@ const ToDos = () => {
                                         </TodoDetail>
                                     )}
                                 </TodoDetailDiv>
-                            </div>
+                            </TodoDivLeftSection>
 
-                            <div style={{ display: "flex" }}>
+                            <TodoDivRightSection>
                                 {getId === todo.id ? (
                                     <TodoButton onClick={() => saveTodo(todo)}>
                                         저장
@@ -158,7 +159,7 @@ const ToDos = () => {
                                 >
                                     삭제
                                 </TodoButton>
-                            </div>
+                            </TodoDivRightSection>
                         </TodoDiv>
                     );
                 })
@@ -180,6 +181,14 @@ const TodoDiv = styled.div`
     border: 2px solid black;
     border-radius: 10px;
     background-color: lightblue;
+`;
+
+const TodoDivLeftSection = styled.div`
+    display: flex;
+    flex-basis: 100%;
+`;
+const TodoDivRightSection = styled.div`
+    display: flex;
 `;
 
 const TodoButton = styled.button`
@@ -218,21 +227,3 @@ const TodoDetailInput = styled.input`
 const TodoDetailDiv2 = styled.div`
     display: flex;
 `;
-// import { userSlice } from "../redux2/user";
-// import React from "react";
-// import { useSelector } from "react-redux";
-// const ToDos = () => {
-//     const user = useSelector((state) => state.user.value);
-//     console.log(userSlice.name);
-
-//     return (
-//         <div>
-//             <h1>profile Page</h1>
-//             <h1>nameL{user.name}</h1>
-//             <h1>{user.age}</h1>
-//             <h1>{user.email}</h1>
-//         </div>
-//     );
-// };
-
-// export default ToDos;
