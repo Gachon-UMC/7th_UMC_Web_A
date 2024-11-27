@@ -13,6 +13,14 @@ const obj = {
     signup: { url: "/auth/register", schema: signUpSchema },
 };
 
+/**
+ *
+ * @param name
+ * @returns
+ * 회원가입인지 로그인인지에 따라 다르게 schema를 적용해서
+ * 성공시에 동작도 다르게 작동할 수 있도록 적용하였습니다.
+ *
+ */
 const usePostAccount = (name: "signin" | "signup") => {
     const setIsLoggedIn = useSetRecoilState(loginState);
     const navigate = useNavigate();

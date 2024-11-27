@@ -7,9 +7,6 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 
 const Header = () => {
-    // 로그인 된 정보를 담을 수 있는
-    // token 값을 이용해서 로그인 만료 기간을 정할 수 있는
-    // 만료시 refreshToken 이용하여 재로그인 가능하게
     const isLoggedIn = useRecoilValue(loginState);
 
     return (

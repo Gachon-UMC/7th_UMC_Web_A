@@ -16,6 +16,7 @@ const Search = () => {
     // debouncedQuery가 변경될 때만 API 요청
     useEffect(() => {
         if (debouncedQuery.trim() === "") return;
+
         const fetchMovies = async () => {
             try {
                 const res = await searchMovieInstance.get("", {

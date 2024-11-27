@@ -10,7 +10,6 @@ const useDebounce = (value: string, delay: number) => {
             setDebouncedValue(value);
             setLoading(false);
         }, delay);
-
         return () => {
             clearTimeout(timer);
         }; //value 변경 시점에 clearTimeout을 해줘야함.

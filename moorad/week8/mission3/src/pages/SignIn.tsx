@@ -14,6 +14,7 @@ const SignIn = () => {
         <SignInContainer
             onSubmit={handleSubmit((data) => handleSignIn.mutate(data))}
         >
+            <h1>로그인</h1>
             <input
                 type="text"
                 placeholder="아이디를 입력하세요."
@@ -40,13 +41,14 @@ const SignIn = () => {
 const SignInContainer = styled.form`
     width: 100%;
     height: calc(100vh - 12vh);
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-
+    & > h1 {
+        font-size: 2rem;
+    }
     & > input {
         width: 40%;
         height: 3rem;

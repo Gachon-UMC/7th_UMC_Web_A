@@ -5,8 +5,8 @@ import useGetMoviesData from "../shared/hooks/useGetMoviesData";
 import useIntersectionObserver from "../shared/hooks/useIntersectionObserver";
 import { ClipLoader } from "react-spinners";
 import Card from "../widgets/Card";
+
 const MainPage = () => {
-    // string 타입이 아닌 categoryObj 타입으로 변환
     const bottomRef = useRef<HTMLDivElement | null>(null);
     const [category, setCategory] = useState<string>("now_playing");
     const {
