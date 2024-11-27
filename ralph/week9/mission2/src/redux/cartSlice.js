@@ -14,7 +14,9 @@ const cartSlice = createSlice({
             console.log(action.payload.length);
             // setPlayList(list) 이렇게 받은 list가 action.payload에 들어가 있기 때문에 다음과 같은 코드로 items state 값을 변경해줌
             state.items = action.payload;
-            const k = action.payload.map((list) => Number(list.amount));
+            const amountList = action.payload.map((list) =>
+                Number(list.amount)
+            );
 
             console.log(state.items);
 
@@ -23,7 +25,7 @@ const cartSlice = createSlice({
             // 밑에와 같이 하면 잘못됨
             // state.sum = action.payload.length 이렇게 했는데
             // 이렇게 하면 만약 초기 데이터의 amount 값이 1이 아닌게 있으면 맞지 않기 떄문에 다음과 같이 reduce 메서드를 사용
-            state.sum = k.reduce((a, b) => a + b);
+            state.sum = amountList.reduce((a, b) => a + b);
 
             console.log(state.sum);
             console.log(action.payload);
