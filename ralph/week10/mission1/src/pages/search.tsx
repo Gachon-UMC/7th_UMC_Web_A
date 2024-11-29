@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchMovieList from "../components/Movie/search-movie-list";
 
 const search = () => {
     const [searchValue, setSearchValue] = useState("");
     const navigate = useNavigate();
-    var timer;
-    const onChangeSearchValue = (e) => {
+
+    const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
     };
     const [searchParams, setSearchParams] = useSearchParams({ mq: " " });
@@ -15,7 +15,9 @@ const search = () => {
         if (mq === searchValue) return;
         navigate(`./search?mq=${searchValue}`);
     };
-    const handleSearchMovieWithKeyboard = (e) => {
+    const handleSearchMovieWithKeyboard = (
+        e: React.KeyboardEvent<HTMLInputElement>
+    ) => {
         if (e.key === "Enter") {
             handleSearchMovie();
         }

@@ -1,12 +1,12 @@
-import React from "react";
 import Movies from "../movies";
 import { useSearchParams } from "react-router-dom";
 import useCustomfetch from "../../hooks/useCustomfetch";
 import styled from "styled-components";
-import Movieskeleton from "./movieskeleton";
 import Movielistskeleton from "./Movielistskeleton";
 import * as S from "../skeleton/movieSkeletonstyle";
-const SearchMovieList = ({ searchValue }) => {
+import { Movie } from "../../types/movieTypes";
+
+const SearchMovieList = ({ searchValue }: { searchValue: string }) => {
     const [searchParams, setSearchParams] = useSearchParams({ mq: " " });
     const mq = searchParams.get("mq");
 
@@ -38,7 +38,7 @@ const SearchMovieList = ({ searchValue }) => {
     }
     return (
         <MovieWrapper>
-            {movies?.map((movie) => (
+            {movies?.map((movie: Movie) => (
                 <Movies key={movie.id} movie={movie} />
             ))}
         </MovieWrapper>

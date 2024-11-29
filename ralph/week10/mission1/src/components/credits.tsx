@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 // 영화의 인물 정보를 나타내는 페이지
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 import styled from "styled-components";
-export default function Credits({ movie }) {
+import { MovieDetail } from "../types/movieTypes";
+export default function Credits({ movie }: { movie: MovieDetail }) {
     return (
         <CreditMainDiv>
             <CreditDiv>

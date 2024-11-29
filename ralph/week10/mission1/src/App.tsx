@@ -13,7 +13,7 @@ import Nowplaying from "./pages/Nowplaying";
 import MovieDetails from "./pages/MovieDetails";
 // react-query 기본 세팅
 import { QueryClient, QueryClientProvider } from "react-query";
-import { MovieDataContextProvider } from "./context/MovieDataContext";
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -72,9 +72,7 @@ const router = createBrowserRouter([
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <MovieDataContextProvider>
-                <RouterProvider router={router} />
-            </MovieDataContextProvider>
+            <RouterProvider router={router} />
         </QueryClientProvider>
 
         //RouterProvider 컴포넌트는 라우터 객체를 받아서 앱에 라우팅을 활성화

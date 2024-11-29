@@ -1,12 +1,9 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { axiosInstance } from "../apis/axios-instance";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Credits from "../components/credits";
-import useCustomfetch from "../hooks/useCustomfetch";
 import { useQuery } from "react-query";
 import QueryMovieDetailData from "../components/QueryMovieDetailData";
+import { MovieDetail } from "../types/movieTypes";
 const MovieDetails = () => {
     const { movieId } = useParams();
     // movieId 라는 값은 App 컴포넌트에서 path 부분 뒤에 적은 것과 같은 이름이여야 한다.
@@ -36,8 +33,10 @@ const MovieDetails = () => {
         <div className="test">
             {data &&
                 data
-                    .filter((movie) => movie.profile_path)
-                    .map((movie) => <Credits key={movie.id} movie={movie} />)}
+                    .filter((movie: MovieDetail) => movie.profile_path)
+                    .map((movie: MovieDetail) => (
+                        <Credits key={movie.id} movie={movie} />
+                    ))}
         </div>
     );
 };

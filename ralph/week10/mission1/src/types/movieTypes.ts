@@ -4,3 +4,9 @@ export type Movie = {
     release_date?: string;
     poster_path?: string;
 };
+
+export type MovieDetail = {
+    id: number;
+    profile_path: string;
+    name: string;
+};

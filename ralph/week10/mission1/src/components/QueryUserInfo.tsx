@@ -1,7 +1,7 @@
 import React from "react";
 import { axiosInstance2 } from "../apis/axiosInstance2";
 // 유저의 정보를 가져오는 컴포넌트
-const QueryUserInfo = async (token) => {
+const QueryUserInfo = async (token: string | null) => {
     try {
         const getData = await axiosInstance2.get("user/me", {
             headers: {
