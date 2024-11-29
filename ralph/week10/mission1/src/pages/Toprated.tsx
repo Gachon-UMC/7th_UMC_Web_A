@@ -32,6 +32,8 @@ const Toprated: React.FC = () => {
         category: "now_playing",
         page: page,
     });
+    console.log(data);
+
     const [hasMore, setHasMore] = useState<boolean>(true);
     const initialData = 20;
 

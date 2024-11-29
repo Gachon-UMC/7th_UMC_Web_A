@@ -1,8 +1,8 @@
 export type Movie = {
     id: number;
     title: string;
-    release_date?: string;
-    poster_path?: string;
+    release_date: string | undefined;
+    poster_path: string;
 };
 
 export type MovieDetail = {

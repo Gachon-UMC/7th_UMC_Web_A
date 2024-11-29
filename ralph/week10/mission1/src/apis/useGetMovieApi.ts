@@ -8,19 +8,23 @@ type UseGetMoviesApiParams = {
 type Movie = {
     id: number;
     title: string;
-    release_date?: string;
-    poster_path?: string;
+    release_date: string;
+    poster_path: string;
 };
 const useGetMoviesApi = async ({
     category,
     pageParam,
 }: UseGetMoviesApiParams): Promise<Movie[]> => {
+    console.log(
+        "API Request:",
+        `/movie/${category}?language=ko&page=${pageParam}&region=KR`
+    );
     console.log(category, pageParam);
     const response = await axiosInstance.get(
         `/movie/${category}?language=ko&page=${pageParam}&region=KR`
     );
     console.log("영화받아오는중");
-    // console.log(response);
+    console.log(response);
 
     return response.data.results;
 };
