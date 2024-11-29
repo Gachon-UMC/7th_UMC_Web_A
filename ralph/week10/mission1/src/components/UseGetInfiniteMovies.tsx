@@ -2,6 +2,7 @@ import React from "react";
 import { useInfiniteQuery } from "react-query";
 import useGetMovieApi from "../apis/useGetMovieApi";
 
+// category 의 type을 string 으로 지정
 const useGetInfiniteMovies = (category: string) => {
     return useInfiniteQuery({
         queryKey: [category],

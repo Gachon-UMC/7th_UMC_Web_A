@@ -6,10 +6,5 @@ const axiosInstance = axios.create({
     },
     baseURL: import.meta.env.VITE_MOVIE_API_URL,
 });
-console.log("Base URL:", axiosInstance.defaults.baseURL);
-console.log(
-    "Authorization Header:",
-    axiosInstance.defaults.headers.Authorization
-);
 
 export { axiosInstance };

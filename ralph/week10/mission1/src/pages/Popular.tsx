@@ -8,7 +8,7 @@ import Movielistskeleton from "../components/Movie/Movielistskeleton";
 const Popular = () => {
     const [hasMore, setHasMore] = useState<boolean>(true);
     const initialData = 20;
-    // custom hook 으로 만들어서 외부에서 가져옴
+
     const { reverseButton, nextButton, page } = useMoveButton();
 
     const { data, isError, isLoading } = useGetMovieData({

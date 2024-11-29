@@ -1,11 +1,19 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axiosInstance2 } from "../apis/axiosInstance2";
 import { useNavigate } from "react-router-dom";
 import { SignUpSchema } from "../schemas/SignUpSchema";
+import { string } from "yup";
+
+// 수정
+
+type signUpUser = {
+    email: string;
+    password: string;
+    checkPassword: string;
+};
 
 function SignUpPage() {
     const {
@@ -18,9 +26,9 @@ function SignUpPage() {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
-        console.log(data);
-
+    // 수정
+    // data의 type을 signUpUser 로 선언
+    const onSubmit = async (data: signUpUser) => {
         try {
             const res = await axiosInstance2.post("/auth/register", {
                 email: data.email,
@@ -32,10 +40,7 @@ function SignUpPage() {
             alert("회원가입 성공");
             navigate("/login");
         } catch (error) {
-            console.error(
-                "회원가입 실패:",
-                error.response ? error.response.data : error.message
-            );
+            console.error("회원가입 실패:", error);
             alert("회원가입에 실패했습니다. 다시 시도해주세요.");
         }
     };
@@ -46,7 +51,6 @@ function SignUpPage() {
 
                 <DivEmailStyle>
                     <InputEmailStyle
-                        name="email"
                         type="email"
                         placeholder="이메일"
                         {...register("email")}
@@ -55,7 +59,6 @@ function SignUpPage() {
                 </DivEmailStyle>
                 <DivPasswordStyle>
                     <InputPasswordStyle
-                        name="password"
                         type="password"
                         placeholder="비밀번호"
                         {...register("password")}
@@ -64,7 +67,6 @@ function SignUpPage() {
                 </DivPasswordStyle>
                 <DivcheckPasswordStyle>
                     <InputcheckPasswordStyle
-                        name="password_confirm"
                         type="password"
                         placeholder="비밀번호 확인"
                         {...register("checkPassword")}

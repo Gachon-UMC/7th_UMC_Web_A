@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 import styled from "styled-components";
 import { Movie } from "../types/movieTypes";
+
+// 수정
+// Movie의 type을 Movie로 선언
 export default function Movies({ movie }: { movie: Movie }) {
     const navigate = useNavigate();
     const onClickMovieitem = () => {

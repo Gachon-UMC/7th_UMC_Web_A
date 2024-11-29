@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../apis/axios-instance.js";
 
+//수정
+//url 의 type을 string으로 선언
 const useCustomfetch = (url: string) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);

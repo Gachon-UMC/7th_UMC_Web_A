@@ -4,6 +4,10 @@ import React from "react";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 import styled from "styled-components";
 import { MovieDetail } from "../types/movieTypes";
+
+// 수정
+// movie의 type을 MovieDetail 로 지정
+
 export default function Credits({ movie }: { movie: MovieDetail }) {
     return (
         <CreditMainDiv>
