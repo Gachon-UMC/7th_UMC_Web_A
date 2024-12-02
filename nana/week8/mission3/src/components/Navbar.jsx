@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from '../apis/axios-instance';
 import styled from 'styled-components';
-import UserInfo from './UserInfo';  // 분리된 컴포넌트 임포트
-import AuthButtons from './AuthButtons';  // 분리된 컴포넌트 임포트
-
-const FetchUser = async() => {
-    const token = localStorage.getItem("accessToken");
-    const response = await axiosInstance.get(`http://localhost:3000/user/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-    return response.data;
-};
+import UserInfo from './UserInfo';
+import AuthButtons from './AuthButtons';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("accessToken"));
+    const [user, setUser] = useState(null); // 유저 정보를 상태로 관리
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
 
-    const { data: user, isError } = useQuery({
-        queryKey: ['user'],
-        queryFn: FetchUser,
-        enabled: isLoggedIn, 
-        onError: (error) => console.error("유저 정보 불러오기 실패:", error.message),
-        retry: false,
-    });
-
+    const token = localStorage.getItem("accessToken");
     useEffect(() => {
-        const handleAuthChange = () => {
-            setIsLoggedIn(!!localStorage.getItem("accessToken"));
-        };
-        window.addEventListener("authChange", handleAuthChange);
-        return () => window.removeEventListener("authChange", handleAuthChange);
-    }, []);
+        // 로그인 여부 확인
+        if (token) {
+            setIsLoggedIn(true);
+
+            // 유저 정보 불러오기
+            const fetchUserData = async () => {
+                try {
+                    const response = await axiosInstance.get("http://localhost:3000/user/me", {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                    setUser(response.data); // 유저 정보 상태 업데이트
+                } catch (error) {
+                    console.error("유저 정보 불러오기 실패:", error.response?.data || error.message);
+                }
+            };
+
+            fetchUserData();
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, [token]);
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
