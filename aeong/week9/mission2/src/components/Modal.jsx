@@ -21,8 +21,11 @@ const StyledAside = styled.aside`
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 10rem;
-  height: 10rem;
+  transform: translate(-50%, -50%);
+  width: 20rem;
+  height: 15rem;
   background: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
 `;

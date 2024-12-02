@@ -57,8 +57,9 @@ export const ChevronUp = () => {
 };
 
 const Svg = styled.svg`
-  width: 3rem;
-  height: 3rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 0.8rem;
 `;
 
 const Chevronsvg = styled.svg`
