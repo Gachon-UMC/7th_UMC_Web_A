@@ -3,21 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "../apis/axiosInstance";
 import styled from "styled-components";
-import Cookies from "js-cookie";
 import { loginSchema } from "../schemas/loginSchema";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-type LoginResponse = {
-    accessToken: string;
-    refreshToken: string;
-};
 
 export type User = {
-    password?: string;
-    email?: string;
-    accessToken?: string;
-    refreshToken?: string;
+    password: string;
+    email: string;
 };
 
 function loginPage() {
@@ -30,21 +22,9 @@ function loginPage() {
         resolver: yupResolver(loginSchema),
     });
 
-    // 수정
-    // type을 boolen으로 선언
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    // 수정
-    // data 라는 변수의 type을 User 선언
-    // UserTypes 컴포넌트에 저장되어 있음
     const onsubmit = async (data: User) => {
-        console.log(data);
-
-        // 수정
-        // const response = await axiosInstance2.post<LoginResponse> 이건
-        // 내가 const { accessToken, refreshToken } = response.data; 이 값을 받는데 받는 값의 type을 지정해주는 것
-        // 굳이 type을 선언을 하지 않아도 동작은 하지만 그럼 typescript 를 쓰는 의미가 없어진다.
         try {
             const response = await axiosInstance.post(
                 "/v1/auth/login",
@@ -60,10 +40,6 @@ function loginPage() {
 
             alert("로그인 성공!");
             navigate("/");
-            setIsLoggedIn(true);
-
-            // 수정
-            // 에러 type은 unknown 으로 설정
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 console.error("Axios 에러:", error.response?.data);
@@ -74,11 +50,10 @@ function loginPage() {
         }
     };
 
+    // 버튼 disabled 를 위한 코드
     const emailValue = watch("email");
     const passwordValue = watch("password");
 
-    // 수정
-    // 여기서 <boolean>으로 type 설정해 줘야 setNotAllow(false), setNotAllow(true) 이것들이 가능하다.
     const [notAllow, setNotAllow] = useState<boolean>();
     useEffect(() => {
         if (emailValue && passwordValue && isValid) {

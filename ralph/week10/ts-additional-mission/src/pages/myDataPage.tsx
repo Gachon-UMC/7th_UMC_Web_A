@@ -6,10 +6,8 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 function myData() {
     const navigate = useNavigate();
-    const [token, setToken] = useState<string | null>(
-        Cookies.get("accessToken") || null
-    );
 
+    const token = Cookies.get("accessToken") || null;
     const {
         data,
         isError: _isError,

@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { axiosInstance } from "../apis/axiosInstance";
-import { useQuery } from "@tanstack/react-query";
-import GetPostData from "./getPostData";
 
 function createPost() {
     const [image, setImage] = useState<string>("");
@@ -19,6 +17,11 @@ function createPost() {
         console.log(uploadFile);
 
         if (uploadFile) {
+            // 이미지 미리보기를 위한 코드
+            const preiewUrl = window.URL.createObjectURL(uploadFile);
+            setImage(preiewUrl); // 이 코드가 없으면 이미지 추가하는 화면에 이미지가 안뜬다
+
+            // 여기 부터는 이제 서버로 이미지를 보내기 위한 코드
             // FormData 객체 생성
             const formData = new FormData();
             formData.append("image", uploadFile); // 'image' 키에 파일 추가
@@ -35,8 +38,17 @@ function createPost() {
                         },
                     }
                 );
+                console.log(response?.data);
+
+                // response.data 의 형태가
+                //{imageUrl: 'aa5072da-874a-4633-a311-4e8e166343e6_1733590439672.png'} 이런식으로 나옴
+                // 내가 필요한 부분은 문자열로 된 'aa5072da-874a-4633-a311-4e8e166343e6_1733590439672.png' 이 부분이기 때문에 다음과 같은 과정으로 분해시킴
 
                 setImageUrl(Object.values(response.data)[0]);
+
+                // console.log(Object.values(response.data));
+                // console.log(Object.values(response.data)[0]);
+
                 if (typeof imageUrl === "string") {
                     console.log(Object.values(response.data)[0]);
                 } else {
@@ -55,22 +67,17 @@ function createPost() {
         } else {
             console.error("업로드할 파일이 없습니다.");
         }
-
-        if (uploadFile) {
-            const url = window.URL.createObjectURL(uploadFile);
-            console.log(url);
-            setImage(url);
-        }
-        console.log(uploadFile?.name);
     };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     };
+
     const handleContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     };
-    const a = async () => {
+
+    const handleCreatePost = async () => {
         const response = await axiosInstance.post("/v1/posts", {
             title: title,
             content: content,
@@ -92,7 +99,7 @@ function createPost() {
                     accept="image/png"
                 />
                 <img src={image} alt="추가된 이미지 입니다"></img>
-                <button onClick={a}>게시물 생성하기</button>
+                <button onClick={handleCreatePost}>게시물 생성하기</button>
                 <button onClick={() => navigate("/")}>홈페이지로 이동</button>
             </Modal>
         </div>

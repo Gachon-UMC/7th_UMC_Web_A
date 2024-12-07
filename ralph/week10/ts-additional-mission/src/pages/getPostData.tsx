@@ -1,12 +1,4 @@
-import {
-    useQuery,
-    useInfiniteQuery,
-    QueryFunctionContext,
-} from "@tanstack/react-query";
-import { QueryGetData } from "./QueryGetData";
-import React from "react";
-import useGetInfinitePostData from "./useGetInfinitePostData";
-import { number } from "yup";
+import { useInfiniteQuery, QueryFunctionContext } from "@tanstack/react-query";
 import { axiosInstance } from "../apis/axiosInstance";
 type LikedUser = {
     user: {

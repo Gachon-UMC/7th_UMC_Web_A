@@ -12,30 +12,13 @@ import { useParams } from "react-router-dom";
 function homePage() {
     const navigate = useNavigate();
 
+    const [heart, setHeart] = useState<number>(0);
+
+    // 기능 1 ,2 : 로그인 , 로그아웃 관련
     const [token, setToken] = useState<string | null>(
         Cookies.get("accessToken") || null
     );
 
-    const [heart, setHeart] = useState<number>(0);
-
-    useEffect(() => {
-        const gettoken: string | undefined = Cookies.get("accessToken");
-        setToken(gettoken ?? null);
-    }, [Cookies.get("accessToken")]);
-
-    const { data } = useQuery({
-        queryKey: ["UserInfo", token],
-        queryFn: () => QueryUserInfo(token),
-        enabled: !!token,
-    });
-    const { data: postData } = GetPostData();
-    console.log(postData);
-    const allData = postData?.pages.flatMap((page) => page.data);
-    console.log(allData);
-
-    // 여기서 useEffect 를 써야하는 이유
-    // 내가 logout 메서드를 실행시켜서 로그아웃을 했는데 이 컴포넌트가 리랜더링이 안되어서 아래  {accessToken || refreshToken ? :} 이 조건문이 다시 실행되질 않아서 헤더 바의 버튼이 변경이 안됨
-    // token을 state로 관리해야할듯
     const logOut = async () => {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
@@ -44,6 +27,26 @@ function homePage() {
         alert("로그아웃 완료");
         navigate("/");
     };
+
+    // 여기서 useEffect 를 써야하는 이유
+    // 내가 logout 메서드를 실행시켜서 로그아웃을 했는데 이 컴포넌트가 리랜더링이 안되어서 아래  {token ? :} 이 조건문이 다시 실행되질 않아서 헤더 바의 버튼이 변경이 안됨
+    // token을 state로 관리해야할듯
+    useEffect(() => {
+        const gettoken: string | undefined = Cookies.get("accessToken");
+        setToken(gettoken ?? null);
+    }, [Cookies.get("accessToken")]);
+
+    // 기능 3 : 내 정보 불러오기
+    const { data } = useQuery({
+        queryKey: ["UserInfo", token],
+        queryFn: () => QueryUserInfo(token),
+        enabled: !!token,
+    });
+
+    const { data: postData } = GetPostData();
+    const allData = postData?.pages.flatMap((page) => page.data);
+
+    // 기능 4 : 게시물 삭제하기 ( 삭제하기 버튼 누르고 새로고침해야 UI에 반영이 되는 문제가 있었어서 useMutaion 사용 해서 해결 )
     const { mutate } = useMutation({
         mutationFn: DeletePostData,
         onSuccess: () => {
@@ -54,6 +57,7 @@ function homePage() {
         },
     });
 
+    // 기능 5 : 게시물 세부 정보 가져오기
     const goDetailPostData = ({ id }: { id: number }) => {
         navigate(`/${id}`);
         GetDetailPostData();
@@ -119,7 +123,10 @@ function homePage() {
                                             싫어요
                                         </button>
                                         <button
-                                            onClick={() => mutate({ id: a.id })}
+                                            onClick={(e) => {
+                                                e?.stopPropagation();
+                                                mutate({ id: a.id });
+                                            }}
                                         >
                                             삭제하기
                                         </button>
