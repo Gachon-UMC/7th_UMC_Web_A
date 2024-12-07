@@ -49,6 +49,7 @@ function homePage() {
     // 기능 4 : 게시물 삭제하기 ( 삭제하기 버튼 누르고 새로고침해야 UI에 반영이 되는 문제가 있었어서 useMutaion 사용 해서 해결 )
     const { mutate } = useMutation({
         mutationFn: DeletePostData,
+        // 요청 성공시 해당 queryKey 유효성 제거해서 캐싱되어 있던 데이터 대신에 새로운 데이터를 서버에 요청
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["postData"] });
         },

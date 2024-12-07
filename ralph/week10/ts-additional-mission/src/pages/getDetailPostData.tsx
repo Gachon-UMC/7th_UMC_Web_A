@@ -28,6 +28,7 @@ const GetDetailPostData = () => {
         };
         getDetailData();
     }, [params.id]);
+
     const fullUrl = `http://localhost:3000/${data?.imageUrl}`;
     return (
         <div>
