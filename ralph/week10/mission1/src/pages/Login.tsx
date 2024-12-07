@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance2 } from "../apis/axiosInstance2.js";
+import { axiosInstance2 } from "../apis/axiosINsta";
 import { useNavigate } from "react-router-dom";
 import { LoginSchema } from "../schemas/LoginSchema.js";
 import { User } from "../types/userTypes.js";
