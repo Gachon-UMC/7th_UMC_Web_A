@@ -7,7 +7,7 @@ import { calculateTotals } from "./features/cart/cartSlice";
 import { useSelector } from "react-redux";
 import ModalPortal from "./components/ModalPortal";
 import Modal from "./components/Modal";
-import { store } from "./store/store";
+import styled from "styled-components";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,16 +22,16 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main>
+      <MainContainer>
         <CartContainer />
         {isOpen && (
           <ModalPortal>
             <Modal>
-              <h4>초기화 하시겠습니까?</h4>
+              <h3>초기화 하시겠습니까?</h3>
             </Modal>
           </ModalPortal>
         )}
-      </main>
+      </MainContainer>
       <footer>
         <Footer />
       </footer>
@@ -40,3 +40,8 @@ function App() {
 }
 
 export default App;
+
+const MainContainer = styled.div`
+  margin-left: 20rem;
+  margin-right: 20rem;
+`;

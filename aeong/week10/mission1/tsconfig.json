@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "target": "ES6",
+    "module": "esnext",
+    "outDir": "./dist",
+    "moduleResolution": "Node",
+    "lib": ["ES6", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["./src/**/*", "./env.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

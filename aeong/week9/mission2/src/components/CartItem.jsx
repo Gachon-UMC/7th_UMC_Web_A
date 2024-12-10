@@ -8,14 +8,16 @@ const CartItem = ({ id, title, singer, price, img, amount }) => {
 
   return (
     <CartItemContainer>
-      <Img src={img} alt={`${title} 이미지`} />
       <InfoContainer>
-        <h4>
-          {title}|{singer}
-        </h4>
-        <h4>{price}</h4>
+        <Img src={img} alt={`${title} 이미지`} />
+        <Info>
+          <h4>
+            {title}|{singer}
+          </h4>
+          <h4>{price}</h4>
+        </Info>
       </InfoContainer>
-      <div>
+      <CountContainer>
         <button className="amount-bnt" onClick={() => dispatch(increase(id))}>
           <ChevronUp />
         </button>
@@ -32,7 +34,7 @@ const CartItem = ({ id, title, singer, price, img, amount }) => {
         >
           <ChevronDown />
         </button>
-      </div>
+      </CountContainer>
     </CartItemContainer>
   );
 };
@@ -42,15 +44,41 @@ export default CartItem;
 const CartItemContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   justify-content: space-between;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const Img = styled.img`
   width: 10rem;
   height: 10rem;
 `;
-const InfoContainer = styled.div`
+const Info = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 2rem;
+`;
+
+const CountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .amount-bnt {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+
+  .amount {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
 `;
